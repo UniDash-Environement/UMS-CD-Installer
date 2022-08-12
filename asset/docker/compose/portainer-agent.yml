@@ -1,0 +1,25 @@
+################
+version: '3.9' #
+services:      #
+################
+#
+#
+##########################################################
+  CN_Portainer_Agent:
+    # -------------------------------------------------- #
+    image: 'portainer/agent'
+    container_name: 'CN_Portainer_Agent'
+    # -------------------------------------------------- #
+    network_mode: 'bridge'
+    hostname: 'CN_Portainer_Agent'
+    # -------------------------------------------------- #
+    restart: 'always'
+    # -------------------------------------------------- #
+    ports:
+      - '9001:9001'
+    volumes:
+      - '/var/lib/docker/volumes:/var/lib/docker/volumes'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    labels:
+      hidden: 'true'
+##########################################################

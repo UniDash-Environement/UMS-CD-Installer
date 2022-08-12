@@ -1,0 +1,36 @@
+################
+version: '3.9' #
+services:      #
+################
+#
+#
+##########################################################
+# Email: admin@example.com | pass: changeme
+# # http://Your_IP:81/ => https://proxy.exemple.fr/
+  CN_Nginx_Proxy_Manager:
+    # -------------------------------------------------- #
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: 'CN_Nginx_Proxy_Manager'
+    # -------------------------------------------------- #
+    network_mode: 'host'
+    hostname: 'CN_Nginx_Proxy_Manager'
+    # -------------------------------------------------- #
+    restart: 'unless-stopped'
+    # -------------------------------------------------- #
+    volumes:
+      - 'Nginx_Proxy_Manager_Data:/data'
+      - 'Nginx_Proxy_Manager_SSL:/etc/letsencrypt'
+##########################################################
+#
+#
+#############################
+#  Déclaration des volumes  #
+#############################
+volumes:
+  # ----------------------- #
+  Nginx_Proxy_Manager_Data:
+    external: false
+  # ----------------------- #
+  Nginx_Proxy_Manager_SSL:
+    external: false
+  # ----------------------- #
