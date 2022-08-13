@@ -42,3 +42,6 @@ function installWireguard() {
         installWireguardServer
     fi
 }
+
+read-conf
+$1

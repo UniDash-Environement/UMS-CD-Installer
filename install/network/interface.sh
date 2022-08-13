@@ -12,3 +12,6 @@ function fixNameServer(){
     echo "nameserver 1.1.1.1
 nameserver 1.0.0.1" > /etc/resolv.conf
 }
+
+read-conf
+$1

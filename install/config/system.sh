@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-def read() {
+Function read-conf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -44,3 +44,6 @@ function changeHostname() {
     hostname="${backendOrFrontend}-${serverNum}-${lowerInfraName}"
     echo $hostname > /etc/hostname
 }
+
+read-conf
+$1

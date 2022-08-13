@@ -22,3 +22,6 @@ function installTimeshift() {
     # créer une snapshot
     sudo timeshift --create
 }
+
+read-conf
+$1

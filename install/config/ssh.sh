@@ -23,3 +23,5 @@ function sshConfig() {
 
     systemctl restart ssh
 }
+
+$1

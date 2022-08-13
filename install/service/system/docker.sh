@@ -36,3 +36,6 @@ function installDocker() {
         cd ../
     fi
 }
+
+read-conf
+$1

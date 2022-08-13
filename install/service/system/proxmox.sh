@@ -49,3 +49,6 @@ function postInstallProxmox() {
     apt-get remove linux-image-amd64 'linux-image-5.10*' os-prober -y
     pveam download local $(pveam available --section system | grep debian-11 | cut -d" " -f11)
 }
+
+read-conf
+$1

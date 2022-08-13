@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-
 function aptSourceList() {
     rm -Rf /etc/apt/sources.list.d/*
     mkdir /etc/apt/sources.list.d
@@ -46,3 +45,6 @@ deb-src http://security.debian.org/debian-security      bullseye-security main c
     apt-get update -y
     apt-get upgrade -y
 }
+
+read-conf
+$1
