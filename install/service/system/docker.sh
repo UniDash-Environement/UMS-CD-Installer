@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function read-conf() {
+function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function install-docker() {
+function installDocker() {
     timeshift --create
 
     sudo apt-get update
@@ -37,5 +37,5 @@ function install-docker() {
     fi
 }
 
-read-conf
+readDonf
 $1

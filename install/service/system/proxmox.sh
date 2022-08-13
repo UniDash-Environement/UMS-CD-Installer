@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function read-conf() {
+function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function install-proxmox() {
+function installProxmox() {
 
     if [ $backendOrFrontend == "backend" 2>/dev/null ]; then
         ip="10.1.0.${serverNum}"
@@ -44,7 +44,7 @@ ff02::2         ip6-allrouters" > /etc/hosts
 }
 
 
-function post-install-proxmox() {
+function postInstallProxmox() {
     sed -i "s/deb/#deb/g" /etc/apt/sources.list.d/pve-enterprise.list 2>/dev/null
     apt-get remove linux-image-amd64 'linux-image-5.10*' os-prober -y
     pveam download local $(pveam available --section system | grep debian-11 | cut -d" " -f11)

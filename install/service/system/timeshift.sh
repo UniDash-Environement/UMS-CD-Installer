@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function read-conf() {
+function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function install-timeshift() {
+function installTimeshift() {
 
     apt-get install timeshift -y
 
@@ -23,5 +23,5 @@ function install-timeshift() {
     sudo timeshift --create
 }
 
-read-conf
+readConf
 $1

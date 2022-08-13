@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function all-install(){
+function allInstall(){
     while true; do
         clear
 
@@ -12,9 +12,9 @@ function all-install(){
         [E]xit"
             read -p "$ " choiceInstallRoot
             case $choiceInstallRoot in
-                [1]* ) apt-source-list && root-password && add-administrator && change-hostname && install-timeshift && reboot;;
-                [2]* ) ssh-config && install-wireguard && network-set && install-proxmox && reboot;;
-                [3]* ) post-install-proxmox && install-docker && reboot;;
+                [1]* ) aptSourceList && rootPassword && addAdministrator && changeHostname && installTimeshift && reboot;;
+                [2]* ) sshConfig && installWireguard && networkSet && installProxmox && reboot;;
+                [3]* ) postInstallProxmox && installDocker && reboot;;
                 [Ee]* ) break;;
             esac
         fi
@@ -22,10 +22,10 @@ function all-install(){
 }
 
 
-function installation-menu() {
+function installationMenu() {
     while true; do
         clear
-        all-auestion
+        allAuestion
         clear
 
         if [ $USER == "root" ]; then
@@ -53,21 +53,21 @@ function installation-menu() {
     [E]xit"
             read -p "$ " choiceInstallRoot
             case $choiceInstallRoot in
-                [Ff]* ) fr-keyboard;;
-                [Hh]* ) change-hostname;;
-                [Vv]* ) network-set;;
-                [Ll]* ) apt-source-list;;
-                [Rr]* ) root-password;;
-                [Uu]* ) add-administrator;;
-                [Zz]* ) install-zsh;;
-                [Ww]* ) install-wireguard-client;;
-                [Tt]* ) install-timeshift;;
-                [Pp]* ) install-proxmox;;
-                [Ss]* ) post-install-proxmox;;
-                [Dd]* ) install-docker;;
-                [Cc]* ) ssh-config;;
-                [Aa]* ) all-install;;
-                [Nn]* ) fix-name-server;;
+                [Ff]* ) frKeyboard;;
+                [Hh]* ) changeHostname;;
+                [Vv]* ) networkSet;;
+                [Ll]* ) aptSourceList;;
+                [Rr]* ) rootPassword;;
+                [Uu]* ) addAdministrator;;
+                [Zz]* ) installZsh;;
+                [Ww]* ) installWireguardClient;;
+                [Tt]* ) installTimeshift;;
+                [Pp]* ) installProxmox;;
+                [Ss]* ) postInstallProxmox;;
+                [Dd]* ) installDocker;;
+                [Cc]* ) sshConfig;;
+                [Aa]* ) allInstall;;
+                [Nn]* ) fixNameServer;;
                 [Ee]* ) break;;
             esac
         else
@@ -76,7 +76,7 @@ function installation-menu() {
     [E]xit"
             read -p "$ " choiceInstall
             case $choiceInstall in
-                [Zz]* ) install-zsh;;
+                [Zz]* ) installZsh;;
                 [Ee]* ) break;;
             esac
         fi
@@ -84,7 +84,7 @@ function installation-menu() {
 }
 
 
-function edition-menu() {
+function editionMenu() {
     while true; do
         clear
 
@@ -93,7 +93,7 @@ function edition-menu() {
     [E]xit"
         read -p "$ " choiceEdition
         case $choiceEdition in
-            [Ll]* ) extend-lvm;;
+            [Ll]* ) extendLvm;;
             [Ee]* ) break;;
         esac
     done
@@ -110,8 +110,8 @@ function start() {
     [E]xit"
         read -p "$ " choiceInstallOrEdition
         case $choiceInstallOrEdition in
-            [Ii]* ) installation-menu;;
-            [Mm]* ) edition-menu;;
+            [Ii]* ) installationMenu;;
+            [Mm]* ) editionMenu;;
             [Ee]* ) break;;
         esac
     done

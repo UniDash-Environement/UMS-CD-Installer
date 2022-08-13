@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-Function read-conf() {
+function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -9,7 +9,7 @@ Function read-conf() {
     fi
 }
 
-function add-administrator() {
+function addAdministrator() {
     apt-get install -y sudo
 
     UTILISATEUR=$userName
@@ -35,15 +35,15 @@ function add-administrator() {
 }
 
 
-function root-password() {
+function rootPassword() {
     echo root:$rootPass | chpasswd;
 }
 
 
-function change-hostname() {
+function changeHostname() {
     hostname="${backendOrFrontend}-${serverNum}-${lowerInfraName}"
     echo $hostname > /etc/hostname
 }
 
-read-conf
+readConf
 $1

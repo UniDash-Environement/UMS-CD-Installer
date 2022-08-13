@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function lvm-question() {
+function lvmQuestion() {
     while true; do
         clear
 
@@ -41,8 +41,8 @@ function lvm-question() {
 }
 
 
-function lvm-extend() {
-    lvm-question
+function lvmExtend() {
+    lvmQuestion
     lvextend -L ${lvmSise}G /dev/mapper/vg0-${lvmVolume}
     resize2fs /dev/mapper/vg0-${lvmVolume}
 }
