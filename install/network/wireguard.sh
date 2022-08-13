@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function read-conf() {
+function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function install-wireguard-client() {
+function installWireguardClient() {
     apt-get install -y wireguard resolvconf
 
     sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf;
@@ -24,7 +24,7 @@ function install-wireguard-client() {
 }
 
 
-function install-wireguard-server() {
+function installWireguardServer() {
     apt-get install wireguard resolvconf -y
 
     echo -e "${wireguardPvKeyServer}" > /etc/wireguard/privatekey;
@@ -35,7 +35,7 @@ function install-wireguard-server() {
 }
 
 
-function install-wireguard() {
+function installWireguard() {
     if [ $backendOrFrontend == "backend" 2>/dev/null ]; then
         install-wireguard-client
     else
@@ -43,5 +43,5 @@ function install-wireguard() {
     fi
 }
 
-read-conf
+readConf
 $1
