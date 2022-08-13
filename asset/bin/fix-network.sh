@@ -10,14 +10,14 @@ function read-conf() {
 }
 
 
-function questionReseaux() {
+function question-reseaux() {
     serverIp=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     serverGateway=$(/sbin/ip route | awk '/default/ { print $3 }')
     serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
 }
 
 
-function networkSet() {
+function network-set() {
     # ajout dans une variable de la carte reseaux, de l'ip et du hostname
     cartereseaux=$(ip -o -4 route show to default | awk '{print $5}')
 
@@ -85,16 +85,16 @@ source-directory /run/network/interfaces.d
 }
 
 
-function fixNameServer(){
+function fix-name-server(){
     echo "nameserver 1.1.1.1
 nameserver 1.0.0.1" > /etc/resolv.conf
 }
 
 read-conf
-questionReseaux
+question-reseaux
 
-networkSet
-fixNameServer
+network-set
+fix-name-server
 
 ifdown wg0
 ifup wg0

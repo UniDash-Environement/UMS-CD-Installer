@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function sshConfig() {
+function ssh-config() {
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g'  /etc/ssh/sshd_config
     sed -i 's/PermitRootLogin yes/PermitRootLogin no/g'                 /etc/ssh/sshd_config
     sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g'       /etc/ssh/sshd_config

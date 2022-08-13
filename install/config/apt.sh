@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function aptSourceList() {
+function apt-source-list() {
     rm -Rf /etc/apt/sources.list.d/*
     mkdir /etc/apt/sources.list.d
     echo "" > /etc/apt/sources.list

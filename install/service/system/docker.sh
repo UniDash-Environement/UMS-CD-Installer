@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function installDocker() {
+function install-docker() {
     timeshift --create
 
     sudo apt-get update

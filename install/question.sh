@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function backendOrFrontendQuestion() {
+function backend-or-frontend-question() {
     while true; do
         clear
 
@@ -15,14 +15,14 @@ function backendOrFrontendQuestion() {
 }
 
 
-function questionReseaux() {
+function question-reseaux() {
     serverIp=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     serverGateway=$(/sbin/ip route | awk '/default/ { print $3 }')
     serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
 }
 
 
-function serverNumQuestion() {
+function server-num-question() {
     while true; do
         clear
 
@@ -38,7 +38,7 @@ function serverNumQuestion() {
 }
 
 
-function infraNameQuestion() {
+function infra-name-question() {
     infraName="UMS-CD"
     lowerInfraName="ums-cd"
 }
@@ -53,7 +53,7 @@ function questionTimeshift () {
 }
 
 
-function questionUserName () {
+function question-user-name () {
     while true; do
         clear
 
@@ -68,7 +68,7 @@ function questionUserName () {
 }
 
 
-function questionUser () {
+function question-user () {
     questionUserName
     while true; do
         clear
@@ -91,7 +91,7 @@ function questionUser () {
 }
 
 
-function questionRoot () {
+function question-root () {
     while true; do
         clear
 
@@ -113,15 +113,15 @@ function questionRoot () {
 }
 
 
-function allQuestion() {
-    questionRoot
-    questionUser
-    infraNameQuestion
-    questionReseaux
-    questionTimeshift
+function all-question() {
+    question-root
+    question-user
+    infra-name-question
+    question-reseaux
+    question-timeshift
 
-    serverNumQuestion
-    backendOrFrontendQuestion
+    server-num-question
+    backend-or-frontend-question
 
     mkdir /etc/ums-cd
     touch /etc/ums-cd/install.conf
@@ -153,6 +153,6 @@ function read-conf() {
 
 function start() {
     if [ not -e /etc/ums-cd/install.conf or $1 == "-f" ]; then
-        allQuestion
+        all-question
     fi
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function networkSet() {
+function network-set() {
     chmod +x /usr/bin/fix-network
     systemctl daemon reload
     systemctl enable --now fix-network
@@ -8,7 +8,7 @@ function networkSet() {
 }
 
 
-function fixNameServer(){
+function fix-name-server(){
     echo "nameserver 1.1.1.1
 nameserver 1.0.0.1" > /etc/resolv.conf
 }

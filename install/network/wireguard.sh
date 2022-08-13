@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function installWireguardClient() {
+function install-wireguard-client() {
     apt-get install -y wireguard resolvconf
 
     sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf;
@@ -24,7 +24,7 @@ function installWireguardClient() {
 }
 
 
-function installWireguardServer() {
+function install-wireguard-server() {
     apt-get install wireguard resolvconf -y
 
     echo -e "${wireguardPvKeyServer}" > /etc/wireguard/privatekey;
@@ -35,11 +35,11 @@ function installWireguardServer() {
 }
 
 
-function installWireguard() {
+function install-wireguard() {
     if [ $backendOrFrontend == "backend" 2>/dev/null ]; then
-        installWireguardClient
+        install-wireguard-client
     else
-        installWireguardServer
+        install-wireguard-server
     fi
 }
 

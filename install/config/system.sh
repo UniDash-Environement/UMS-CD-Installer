@@ -9,7 +9,7 @@ Function read-conf() {
     fi
 }
 
-function addAdministrator() {
+function add-administrator() {
     apt-get install -y sudo
 
     UTILISATEUR=$userName
@@ -35,12 +35,12 @@ function addAdministrator() {
 }
 
 
-function rootPassword() {
+function root-password() {
     echo root:$rootPass | chpasswd;
 }
 
 
-function changeHostname() {
+function change-hostname() {
     hostname="${backendOrFrontend}-${serverNum}-${lowerInfraName}"
     echo $hostname > /etc/hostname
 }

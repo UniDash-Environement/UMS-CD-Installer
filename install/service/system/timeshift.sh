@@ -9,7 +9,7 @@ function read-conf() {
     fi
 }
 
-function installTimeshift() {
+function install-timeshift() {
 
     apt-get install timeshift -y
 
