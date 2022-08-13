@@ -1,5 +1,14 @@
 #!/usr/bin/bash
 
+def read() {
+    if [ -e /etc/ums-cd/install.conf ]; then
+        while read var value
+        do
+            export "$var"="$value"
+        done < /etc/ums-cd/install.conf
+    fi
+}
+
 function addAdministrator() {
     apt-get install -y sudo
 

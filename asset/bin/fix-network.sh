@@ -1,12 +1,11 @@
 #!/bin/bash
 
-function backendOrFrontendQuestion() {
-    if [ $(cat /etc/hostname | cut -d"-" -f1) != "CT" ]; then
-        backendOrFrontend=$(cat /etc/hostname | cut -d"-" -f1)
-        serverNum=$(cat /etc/hostname | cut -d"-" -f2)
-    else
-        backendOrFrontend="backend"
-        serverNum=255.255
+function read-conf() {
+    if [ -e /etc/ums-cd/config.conf ]; then
+        while read var value
+        do
+            export "$var"="$value"
+        done < /etc/ums-cd/config.conf
     fi
 }
 
@@ -91,7 +90,7 @@ function fixNameServer(){
 nameserver 1.0.0.1" > /etc/resolv.conf
 }
 
-backendOrFrontendQuestion
+read-conf
 questionReseaux
 
 networkSet

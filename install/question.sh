@@ -39,8 +39,8 @@ function serverNumQuestion() {
 
 
 function infraNameQuestion() {
-    infraName="Upscalable_MultiSite-Cloud_Deployer"
-    lowerInfraName="upscalable_multiSite-cloud_deployer"
+    infraName="UMS-CD"
+    lowerInfraName="ums-cd"
 }
 
 
@@ -123,4 +123,36 @@ function allQuestion() {
     serverNumQuestion
     backendOrFrontendQuestion
 
+    mkdir /etc/ums-cd
+    touch /etc/ums-cd/install.conf
+
+    echo -e "backendOrFrontend=${backendOrFrontend}\n" > /etc/ums-cd/install.conf
+    echo -e "serverIp=${serverIp}\n" >> /etc/ums-cd/install.conf
+    echo -e "serverGateway=${serverGateway}\n" >> /etc/ums-cd/install.conf
+    echo -e "serverMask=${serverMask}\n" >> /etc/ums-cd/install.conf
+    echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/install.conf
+    echo -e "lowerInfraName=${lowerInfraName}\n" >> /etc/ums-cd/install.conf
+    echo -e "infraName=${infraName}\n" >> /etc/ums-cd/install.conf
+    echo -e "timeshiftUUID=${timeshiftUUID}\n" >> /etc/ums-cd/install.conf
+    echo -e "userName=${userName}\n" >> /etc/ums-cd/install.conf
+    echo -e "userPass=${userPass}\n" >> /etc/ums-cd/install.conf
+    echo -e "rootPass=${rootPass}\n" >> /etc/ums-cd/install.conf
+
+    echo -e "backendOrFrontend=${backendOrFrontend}\n" > /etc/ums-cd/config.conf
+    echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/config.conf
+}
+
+function read-conf() {
+    if [ -e /etc/ums-cd/install.conf ]; then
+        while read var value
+        do
+            export "$var"="$value"
+        done < /etc/ums-cd/install.conf
+    fi
+}
+
+function start() {
+    if [ not -e /etc/ums-cd/install.conf or $1 == "-f" ]; then
+        allQuestion
+    fi
 }
