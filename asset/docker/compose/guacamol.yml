@@ -1,0 +1,92 @@
+###########################
+#   Username: guacadmin
+#   Password: guacadmin
+#   command a taper: mkdir -p /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/ >/dev/null 2>&1
+#   command a taper: docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/initdb.sql
+###########################
+version: '2.0'
+services:
+###########################
+#
+#
+##########################################################
+  CN_Guacamole_GuaCd:
+    # -------------------------------------------------- #
+    container_name: 'CN_Guacamole_GuaCd'
+    image: 'guacamole/guacd'
+    # -------------------------------------------------- #
+    network_mode: 'bridge'
+    # -------------------------------------------------- #
+    volumes:
+    - 'CN_Guacamole_GuaCd_Drive:/drive:rw'
+    - 'CN_Guacamole_GuaCd_Record:/record:rw'
+##########################################################
+#
+#
+##########################################################
+  CN_Guacamole_PostgreSQL:
+    # -------------------------------------------------- #
+    container_name: 'CN_Guacamole_PostgreSQL'
+    image: 'postgres:13.4'
+    restart: 'always'
+    # -------------------------------------------------- #
+    network_mode: 'bridge'
+    # -------------------------------------------------- #
+    environment:
+      PGDATA: '/var/lib/postgresql/data/guacamole'
+      POSTGRES_DB: 'CN_PostgreSQL'
+      POSTGRES_PASSWORD: 'ChangeMe'
+      POSTGRES_USER: 'guacamole_user'
+    # -------------------------------------------------- #
+    volumes:
+    - 'CN_Guacamole_PostgreSQL_Init:/docker-entrypoint-initdb.d:ro'
+    - 'CN_Guacamole_PostgreSQL_Data:/var/lib/postgresql/data:rw'
+##########################################################
+#
+#
+##########################################################
+  CN_Guacamole_WebSite:
+    # -------------------------------------------------- #
+    container_name: 'CN_Guacamole_WebSite'
+    image: 'guacamole/guacamole'
+    restart: 'always'
+    # -------------------------------------------------- #
+    network_mode: 'bridge'
+    # -------------------------------------------------- #
+    links:
+    - 'CN_Guacamole_GuaCd'
+    # -------------------------------------------------- #
+    depends_on:
+    - 'CN_Guacamole_GuaCd'
+    - 'CN_Guacamole_PostgreSQL'
+    # -------------------------------------------------- #
+    environment:
+      GUACD_HOSTNAME: 'CN_Guacamole_GuaCd'
+      POSTGRES_DATABASE: 'guacamole_db'
+      POSTGRES_HOSTNAME: 'CN_Guacamole_PostgreSQL'
+      POSTGRES_PASSWORD: 'ChangeMe'
+      POSTGRES_USER: 'guacamole_user'
+    # -------------------------------------------------- #
+    ports:
+    - '8586:8080/tcp'
+    # -------------------------------------------------- #
+##########################################################
+#
+#
+##########################################################
+# Déclaration des volumes #
+###########################
+volumes:
+ # ---------------- #
+ CN_Guacamole_GuaCd_Drive:
+  external: false
+ # ---------------- #
+ CN_Guacamole_GuaCd_Record:
+  external: false
+ # ---------------- #
+ CN_Guacamole_PostgreSQL_Init:
+  external: false
+ # ---------------- #
+ CN_Guacamole_PostgreSQL_Data:
+  external: false
+ # ---------------- #
