@@ -1,5 +1,34 @@
 #!/usr/bin/bash
 
+function allInstallPart1() {
+    bash ./install/config/apt.sh aptSourceList
+    bash ./install/config/system.sh rootPassword
+    bash ./install/config/system.sh addAdministrator
+    bash ./install/config/system.sh changeHostname
+    bash ./install/service/system/timeshift.sh installTimeshift
+
+    reboot
+}
+
+
+function allInstallPart2() {
+    bash ./install/config/ssh.sh sshConfig
+    bash ./install/network/wireguard.sh installWireguard
+    bash ./install/network/interface.sh networkSet
+    bash ./install/service/system/proxmox.sh installProxmox
+
+    reboot
+}
+
+
+function allInstallPart3() {
+    bash ./install/service/system/proxmox.sh postInstallProxmox
+    bash ./install/service/system/docker.sh installDocker
+
+    reboot
+}
+
+
 function allInstall(){
     while true; do
         clear
@@ -12,9 +41,9 @@ function allInstall(){
         [E]xit"
             read -p "$ " choiceInstallRoot
             case $choiceInstallRoot in
-                [1]* ) aptSourceList && rootPassword && addAdministrator && changeHostname && installTimeshift && reboot;;
-                [2]* ) sshConfig && installWireguard && networkSet && installProxmox && reboot;;
-                [3]* ) postInstallProxmox && installDocker && reboot;;
+                [1]* ) allInstallPart1;;
+                [2]* ) allInstallPart2;;
+                [3]* ) allInstallPart3;;
                 [Ee]* ) break;;
             esac
         fi
@@ -30,14 +59,12 @@ function installationMenu() {
 
         if [ $USER == "root" ]; then
             echo "Voulez Vous installer:
-    [A]ll (sauf zsh il faut l'éxécuté une fois en utilisateur)
+    [A]ll
 
     [T]imeshift
 
     [R]oot Mots de pass
     [U]tilisateur
-    [F]r keyboard
-    [Z]SH
     [C]onfig ssh
 
     [L]ist Source apt
@@ -53,30 +80,19 @@ function installationMenu() {
     [E]xit"
             read -p "$ " choiceInstallRoot
             case $choiceInstallRoot in
-                [Ff]* ) frKeyboard;;
-                [Hh]* ) changeHostname;;
-                [Vv]* ) networkSet;;
-                [Ll]* ) aptSourceList;;
-                [Rr]* ) rootPassword;;
-                [Uu]* ) addAdministrator;;
-                [Zz]* ) installZsh;;
-                [Ww]* ) installWireguardClient;;
-                [Tt]* ) installTimeshift;;
-                [Pp]* ) installProxmox;;
-                [Ss]* ) postInstallProxmox;;
-                [Dd]* ) installDocker;;
-                [Cc]* ) sshConfig;;
+                [Hh]* ) bash ./install/config/system.sh changeHostname;;
+                [Vv]* ) bash ./install/network/interface.sh networkSet;;
+                [Ll]* ) bash ./install/config/apt.sh aptSourceList;;
+                [Rr]* ) bash ./install/config/system.sh rootPassword;;
+                [Uu]* ) bash ./install/config/system.sh addAdministrator;;
+                [Ww]* ) bash ./install/network/wireguard.sh installWireguardClient;;
+                [Tt]* ) bash ./install/service/system/timeshift.sh installTimeshift;;
+                [Pp]* ) bash ./install/service/system/proxmox.sh installProxmox;;
+                [Ss]* ) bash ./install/service/system/proxmox.sh postInstallProxmox;;
+                [Dd]* ) bash ./install/service/system/docker.sh installDocker;;
+                [Cc]* ) bash ./install/config/ssh.sh sshConfig;;
                 [Aa]* ) allInstall;;
-                [Nn]* ) fixNameServer;;
-                [Ee]* ) break;;
-            esac
-        else
-            echo "Voulez Vous installer:
-    [Z]SH
-    [E]xit"
-            read -p "$ " choiceInstall
-            case $choiceInstall in
-                [Zz]* ) installZsh;;
+                [Nn]* ) bash ./install/network/interface.sh fixNameServer;;
                 [Ee]* ) break;;
             esac
         fi
@@ -93,7 +109,7 @@ function editionMenu() {
     [E]xit"
         read -p "$ " choiceEdition
         case $choiceEdition in
-            [Ll]* ) extendLvm;;
+            [Ll]* ) lvm-extend;;
             [Ee]* ) break;;
         esac
     done
