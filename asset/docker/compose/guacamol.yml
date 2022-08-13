@@ -1,8 +1,8 @@
 ###########################
 #   Username: guacadmin
 #   Password: guacadmin
-#   command a taper: mkdir -p /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/ >/dev/null 2>&1
-#   command a taper: docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/initdb.sql
+#   command.sh a taper: mkdir -p /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/ >/dev/null 2>&1
+#   command.sh a taper: docker run --rm guacamole/guacamole /opt/guacamole/bin/initdb.sh --postgres > /var/lib/docker/volumes/guacamole_CN_Guacamole_PostgreSQL_Init/_data/initdb.sql
 ###########################
 version: '2.0'
 services:
