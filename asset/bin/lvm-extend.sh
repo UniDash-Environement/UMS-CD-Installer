@@ -46,3 +46,5 @@ function lvmExtend() {
     lvextend -L ${lvmSise}G /dev/mapper/vg0-${lvmVolume}
     resize2fs /dev/mapper/vg0-${lvmVolume}
 }
+
+lvmExtend
