@@ -1,0 +1,31 @@
+################
+version: '3.9' #
+services:      #
+################
+#
+#
+#################################################################
+  CN_UMSCentralPanel:
+    # --------------------------------------------------------- #
+    image: 'umscdlinux/ums-central-panel:latest'
+    container_name: 'CN_UMSCentralPanel'
+    hostname: 'CN_UMSCentralPanel'
+    # --------------------------------------------------------- #
+    network_mode: 'bridge'
+    restart: 'always'
+    # --------------------------------------------------------- #
+    ports:
+      - '8003:80'
+    # --------------------------------------------------------- #
+    volumes:
+      - 'UMSCentralPanel_Data:/var/www/html'
+#################################################################
+#
+#
+#####################################
+volumes: #  Déclaration du volumes  #
+  # ------------------------------- #
+  UMSCentralPanel_Data:
+    name: 'UMSCentralPanel_Data'
+    external: false
+  # ------------------------------- #
