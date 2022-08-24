@@ -4,7 +4,7 @@ function lvmQuestion() {
     while true; do
         clear
 
-        echo "Voulez Vous installer:
+        echo "Quel Volume Voulez Vous Etendre:
     [0]swap
     [1]root(/)
     [2]opt(/opt)
