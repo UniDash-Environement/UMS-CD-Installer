@@ -1,0 +1,10 @@
+[Unit]
+Description=Fix network
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/auto-clear-log
+
+[Install]
+WantedBy=network.target
