@@ -59,20 +59,21 @@ function installationMenu() {
         clear
 
         if [ $USER == "root" ]; then
-    choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 25 78 14 \
+    choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 15 60 3 \
     "AutoInstall" "Automatic Installation" \
     "ManualInstall" "Manual Installation" \
-    "Exit" "Exit Installer")
+    "Exit" "Exit Installer" 3>&1 1>&2 2>&3)
+
     if [ $choiceInstallMethod == "AutoInstall" ]; then
     allInstall
     fi
-    
+
     if [ $choiceInstallMethod == "Exit" ]; then
     break
     fi
 
     if [ $choiceInstallMethod == "ManualInstall" ]; then
-    choiceInstallRoot=$(whiptail --title "UMS-CD Manual Installer" --menu "Choose an option" 25 78 14 \
+    choiceInstallRoot=$(whiptail --title "UMS-CD Manual Installer" --menu "Choose an option" 15 60 14 \
     "Timeshift" "Install and Configure Timeshift" \
     "RootPassword" "Set Root Password" \
     "User" "Add An Administrator" \
@@ -85,7 +86,7 @@ function installationMenu() {
     "ProxmoxP1" "Install Proxmox (Part 1)" \
     "ProxmoxP2" "Install Proxmox (Part 2)" \
     "Docker" "Install Docker" \
-    "Exit" "Exit Manual Installer")
+    "Exit" "Exit Manual Installer" 3>&1 1>&2 2>&3)
 
             case $choiceInstallRoot in
                 Hostname ) bash ./install/config/system.sh changeHostname;;
