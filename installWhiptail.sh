@@ -7,29 +7,26 @@ function allInstallPart1() {
     bash ./install/config/system.sh addAdministrator
     bash ./install/config/system.sh changeHostname
     bash ./install/service/system/timeshift.sh installTimeshift
-    echo "cd /root/UMS-CD-Installer && bash install.sh Part2" > /root/.bashrc
-
+    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
+    echo "cd /root/UMS-CD-Installer && bash install.sh part2" >> /root/.bashrc
     reboot
 }
 
 
 function allInstallPart2() {
-    echo "" > /root/.bashrc
     bash ./install/config/ssh.sh sshConfig
     bash ./install/network/wireguard.sh installWireguard
     bash ./install/network/interface.sh networkSet
     bash ./install/service/system/proxmox.sh installProxmox
-    echo "cd /root/UMS-CD-Installer && bash install.sh Part3" > /root/.bashrc
-
+    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part2/cd \/root\/UMS-CD-Installer && bash install.sh part3/g" /root/.bashrc
     reboot
 }
 
 
 function allInstallPart3() {
-    echo "" > /root/.bashrc
+    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part3//g" /root/.bashrc
     bash ./install/service/system/proxmox.sh postInstallProxmox
     bash ./install/service/system/docker.sh installDocker
-
     reboot
 }
 
@@ -49,9 +46,7 @@ function mainMenu() {
                 allInstallPart1
             else if [ $choiceInstallMethod == "editMenu"] then
                 editMenu
-            fi
-
-            if [ -z $choiceInstallMethod ]; then
+            else if [ -z $choiceInstallMethod ]; then
                 break
             fi
 
@@ -131,10 +126,10 @@ function lvmMenu() {
 
     if [ -z $1 ]; then
         mainMenu
-        else if [$1 == "Part2"] then
-            allInstallPart2
-            else if [$1 == "Part3"] then
-                allInstallPart3
-            fi
-        fi
+    else if [$1 == "part1"] then
+        allInstallPart1
+    else if [$1 == "part2"] then
+        allInstallPart2
+    else if [$1 == "part3"] then
+        allInstallPart3
     fi
