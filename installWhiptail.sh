@@ -52,64 +52,66 @@ function allInstall(){
 }
 
 
-function installationMenu() {
+function mainMenu() {
     while true; do
         clear
         allAuestion
         clear
 
         if [ $USER == "root" ]; then
-    choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 15 60 3 \
-    "AutoInstall" "Automatic Installation" \
-    "ManualInstall" "Manual Installation" \
-    "Exit" "Exit Installer" 3>&1 1>&2 2>&3)
+            choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 15 60 3 \
+            "autoInstall" "Automatic Installation" \
+            "manualInstall" "Manual Installation" \
+            "editMenu" "Open Edit Menu" 3>&1 1>&2 2>&3)
 
-    if [ $choiceInstallMethod == "AutoInstall" ]; then
-    allInstall
-    fi
+            if [ $choiceInstallMethod == "autoInstall" ]; then
+                allInstall
+            else if [ $choiceInstallMethod == "editMenu"]
+                editMenu
+            fi
 
-    if [ $choiceInstallMethod == "Exit" ]; then
-    break
-    fi
+            if [ -z $choiceInstallMethod ]; then
+                break
+            fi
 
-    if [ $choiceInstallMethod == "ManualInstall" ]; then
-    choiceInstallRoot=$(whiptail --title "UMS-CD Manual Installer" --menu "Choose an option" 15 60 14 \
-    "Timeshift" "Install and Configure Timeshift" \
-    "RootPassword" "Set Root Password" \
-    "User" "Add An Administrator" \
-    "SshConfigure" "Configure SSH" \
-    "ListApt" "Add APT Sources List" \
-    "VlanServer" "Configure Network Interface" \
-    "Hostname" "Configure Hostname" \
-    "WireguardClient" "Configure Wireguard Client" \
-    "NameServer" "Start taking defined backup" \
-    "ProxmoxP1" "Install Proxmox (Part 1)" \
-    "ProxmoxP2" "Install Proxmox (Part 2)" \
-    "Docker" "Install Docker" \
-    "Exit" "Exit Manual Installer" 3>&1 1>&2 2>&3)
+            if [ $choiceInstallMethod == "manualInstall" ]; then
+                choiceInstallRoot=$(whiptail --title "UMS-CD Manual Installer" --menu "Choose an option" 15 60 14 \
+                "timeshift" "Install and Configure Timeshift" \
+                "rootPassword" "Set Root Password" \
+                "user" "Add An Administrator" \
+                "sshConfigure" "Configure SSH" \
+                "listApt" "Add APT Sources List" \
+                "vlanServer" "Configure Network Interface" \
+                "hostname" "Configure Hostname" \
+                "wireguardClient" "Configure Wireguard Client" \
+                "nameServer" "Start taking defined backup" \
+                "proxmoxP1" "Install Proxmox (Part 1)" \
+                "proxmoxP2" "Install Proxmox (Part 2)" \
+                "docker" "Install Docker" \
+                "exit" "Exit Manual Installer" 3>&1 1>&2 2>&3)
 
-            case $choiceInstallRoot in
-                Hostname ) bash ./install/config/system.sh changeHostname;;
-                VlanServer ) bash ./install/network/interface.sh networkSet;;
-                ListApt ) bash ./install/config/apt.sh aptSourceList;;
-                RootPassword ) bash ./install/config/system.sh rootPassword;;
-                User ) bash ./install/config/system.sh addAdministrator;;
-                WireguardClient ) bash ./install/network/wireguard.sh installWireguardClient;;
-                NameServer ) bash ./install/service/system/timeshift.sh installTimeshift;;
-                ProxmoxP1 ) bash ./install/service/system/proxmox.sh installProxmox;;
-                ProxmoxP2 ) bash ./install/service/system/proxmox.sh postInstallProxmox;;
-                Docker ) bash ./install/service/system/docker.sh installDocker;;
-                SshConfigure ) bash ./install/config/ssh.sh sshConfig;;
-                NameServer ) bash ./install/network/interface.sh fixNameServer;;
-                Exit ) break;;
-            esac
-        fi    
-    fi
-done
+                case $choiceInstallRoot in
+                    Hostname ) bash ./install/config/system.sh changeHostname;;
+                    VlanServer ) bash ./install/network/interface.sh networkSet;;
+                    ListApt ) bash ./install/config/apt.sh aptSourceList;;
+                    RootPassword ) bash ./install/config/system.sh rootPassword;;
+                    User ) bash ./install/config/system.sh addAdministrator;;
+                    WireguardClient ) bash ./install/network/wireguard.sh installWireguardClient;;
+                    NameServer ) bash ./install/service/system/timeshift.sh installTimeshift;;
+                    ProxmoxP1 ) bash ./install/service/system/proxmox.sh installProxmox;;
+                    ProxmoxP2 ) bash ./install/service/system/proxmox.sh postInstallProxmox;;
+                    Docker ) bash ./install/service/system/docker.sh installDocker;;
+                    SshConfigure ) bash ./install/config/ssh.sh sshConfig;;
+                    NameServer ) bash ./install/network/interface.sh fixNameServer;;
+                    Exit ) break;;
+                esac
+            fi    
+        fi
+    done
 }
 
 
-function editionMenu() {
+function editMenu() {
     while true; do
         clear
 
@@ -123,24 +125,4 @@ function editionMenu() {
         esac
     done
 }
-
-
-function start() {
-    while true; do
-        clear
-
-        echo "Voulez Vous faire une
-    [I]nstallation
-    [M]odifiquation
-    [E]xit"
-        read -p "$ " choiceInstallOrEdition
-        case $choiceInstallOrEdition in
-            [Ii]* ) installationMenu;;
-            [Mm]* ) editionMenu;;
-            [Ee]* ) break;;
-        esac
-    done
-
-    clear
-}
-start
+mainMenu
