@@ -66,7 +66,7 @@ function mainMenu() {
 
             if [ $choiceInstallMethod == "autoInstall" ]; then
                 allInstall
-            else if [ $choiceInstallMethod == "editMenu"]
+            else if [ $choiceInstallMethod == "editMenu"] then
                 editMenu
             fi
 
