@@ -59,25 +59,35 @@ function installationMenu() {
         clear
 
         if [ $USER == "root" ]; then
-    choiceInstallRoot=$(whiptail --title "Menu example" --menu "Choose an option" 25 78 5 \
-    "AutoInstall" "Start taking defined backup" \
-    "Timeshift" "restore from last backup" \
-    "RootPassword" "Start taking defined backup" \
-    "User" "Start taking defined backup" \
-    "SshConfigure" "Start taking defined backup" \
-    "ListApt" "Start taking defined backup" \
-    "VlanServer" "Start taking defined backup" \
-    "Hostname" "Start taking defined backup" \
-    "WireguardClient" "Start taking defined backup" \
-    "NameServer" "Start taking defined backup" \
-    "ProxmoxP1" "Start taking defined backup" \
-    "ProxmoxP2" "Start taking defined backup" \
-    "Docker" "Start taking defined backup" \
-    "Exit" "Start taking defined backup")
+    choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 25 78 14 \
+    "AutoInstall" "Automatic Installation" \
+    "ManualInstall" "Manual Installation" \
+    "Exit" "Exit Installer")
+    if [ $choiceInstallMethod == "AutoInstall" ]; then
+    allInstall
+    fi
+    
+    if [ $choiceInstallMethod == "Exit" ]; then
+    break
+    fi
 
-    echo $choiceInstallRoot
-    choiceInstallRoot2="Exit"
-            case $choiceInstallRoot2 in
+    if [ $choiceInstallMethod == "ManualInstall" ]; then
+    choiceInstallRoot=$(whiptail --title "UMS-CD Manual Installer" --menu "Choose an option" 25 78 14 \
+    "Timeshift" "Install and Configure Timeshift" \
+    "RootPassword" "Set Root Password" \
+    "User" "Add An Administrator" \
+    "SshConfigure" "Configure SSH" \
+    "ListApt" "Add APT Sources List" \
+    "VlanServer" "Configure Network Interface" \
+    "Hostname" "Configure Hostname" \
+    "WireguardClient" "Configure Wireguard Client" \
+    "NameServer" "Start taking defined backup" \
+    "ProxmoxP1" "Install Proxmox (Part 1)" \
+    "ProxmoxP2" "Install Proxmox (Part 2)" \
+    "Docker" "Install Docker" \
+    "Exit" "Exit Manual Installer")
+
+            case $choiceInstallRoot in
                 Hostname ) bash ./install/config/system.sh changeHostname;;
                 VlanServer ) bash ./install/network/interface.sh networkSet;;
                 ListApt ) bash ./install/config/apt.sh aptSourceList;;
@@ -89,12 +99,12 @@ function installationMenu() {
                 ProxmoxP2 ) bash ./install/service/system/proxmox.sh postInstallProxmox;;
                 Docker ) bash ./install/service/system/docker.sh installDocker;;
                 SshConfigure ) bash ./install/config/ssh.sh sshConfig;;
-                AutoInstall ) allInstall;;
                 NameServer ) bash ./install/network/interface.sh fixNameServer;;
                 Exit ) break;;
             esac
-        fi
-    done
+        fi    
+    fi
+done
 }
 
 
