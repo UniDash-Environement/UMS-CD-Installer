@@ -7,50 +7,31 @@ function allInstallPart1() {
     bash ./install/config/system.sh addAdministrator
     bash ./install/config/system.sh changeHostname
     bash ./install/service/system/timeshift.sh installTimeshift
+    echo "cd /root/UMS-CD-Installer && bash install.sh Part2" > /root/.bashrc
 
     reboot
 }
 
 
 function allInstallPart2() {
+    echo "" > /root/.bashrc
     bash ./install/config/ssh.sh sshConfig
     bash ./install/network/wireguard.sh installWireguard
     bash ./install/network/interface.sh networkSet
     bash ./install/service/system/proxmox.sh installProxmox
+    echo "cd /root/UMS-CD-Installer && bash install.sh Part3" > /root/.bashrc
 
     reboot
 }
 
 
 function allInstallPart3() {
+    echo "" > /root/.bashrc
     bash ./install/service/system/proxmox.sh postInstallProxmox
     bash ./install/service/system/docker.sh installDocker
 
     reboot
 }
-
-
-function allInstall(){
-    while true; do
-        clear
-
-        if [ $USER == "root" 2>/dev/null ]; then
-            echo "Voulez Vous installer:
-        [1]Partie 1
-        [2]Partie 2
-        [3]Partie 3
-        [E]xit"
-            read -p "$ " choiceInstallRoot
-            case $choiceInstallRoot in
-                [1]* ) allInstallPart1;;
-                [2]* ) allInstallPart2;;
-                [3]* ) allInstallPart3;;
-                [Ee]* ) break;;
-            esac
-        fi
-    done
-}
-
 
 function mainMenu() {
     while true; do
@@ -65,7 +46,7 @@ function mainMenu() {
             "editMenu" "Open Edit Menu" 3>&1 1>&2 2>&3)
 
             if [ $choiceInstallMethod == "autoInstall" ]; then
-                allInstall
+                allInstallPart1
             else if [ $choiceInstallMethod == "editMenu"] then
                 editMenu
             fi
@@ -87,8 +68,11 @@ function mainMenu() {
                 "nameServer" "Start taking defined backup" \
                 "proxmoxP1" "Install Proxmox (Part 1)" \
                 "proxmoxP2" "Install Proxmox (Part 2)" \
-                "docker" "Install Docker" \
-                "exit" "Exit Manual Installer" 3>&1 1>&2 2>&3)
+                "docker" "Install Docker" 3>&1 1>&2 2>&3)
+
+                if [ -z $choiceInstallRoot ]; then
+                break
+                fi
 
                 case $choiceInstallRoot in
                     Hostname ) bash ./install/config/system.sh changeHostname;;
@@ -103,7 +87,6 @@ function mainMenu() {
                     Docker ) bash ./install/service/system/docker.sh installDocker;;
                     SshConfigure ) bash ./install/config/ssh.sh sshConfig;;
                     NameServer ) bash ./install/network/interface.sh fixNameServer;;
-                    Exit ) break;;
                 esac
             fi    
         fi
@@ -114,15 +97,44 @@ function mainMenu() {
 function editMenu() {
     while true; do
         clear
-
-        echo "Voulez Vous faire une
-    [L]vm
-    [E]xit"
-        read -p "$ " choiceEdition
-        case $choiceEdition in
-            [Ll]* ) lvm-extend;;
-            [Ee]* ) break;;
+            choice=$(whiptail --title "UMS Tweaker" --menu "Choose an Option" 15 60 3 \
+            "lvm" "LVM Resize" \
+            "changeDns" "Change DNS Settings" \
+            "shareSshKey" "Share SSH Key to Other Servers" \
+            "clearLogs" "Clear Server Logs" \
+            "fixNetwork" "Reload and Reconfigure Network Settings" 3>&1 1>&2 2>&3)
+        if [ -z $choice ]; then
+            break
+        fi
+        case $choice in
+            lvm ) lvmMenu;;
+            changeDns ) changeDns;;
+            shareSshKey ) shareSshKey;;
+            clearLogs ) clearLogs;;
+            fixNetwork ) fixNetwork;;
         esac
     done
 }
-mainMenu
+function lvmMenu() {
+    while true; do
+        clear
+            choice=$(whiptail --title "UMS Tweaker : LVM" --menu "Choose an Option" 15 60 3 \
+            "extend" "extend LVM partition" \
+            "retract" "retract LVM partition" 3>&1 1>&2 2>&3)
+
+        case $choice in
+            extend ) lvm-extend;;
+            retract ) lvm-retract;;
+        esac
+    done
+}
+
+    if [ -z $1 ]; then
+        mainMenu
+        else if [$1 == "Part2"] then
+            allInstallPart2
+            else if [$1 == "Part3"] then
+                allInstallPart3
+            fi
+        fi
+    fi
