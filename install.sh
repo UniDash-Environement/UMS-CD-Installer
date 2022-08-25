@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 function allInstallPart1() {
-    bash ./install/service/system/command.sh installLVMCommand
+    bash ./install/service/system/command.sh
     bash ./install/config/apt.sh aptSourceList
     bash ./install/config/system.sh rootPassword
     bash ./install/config/system.sh addAdministrator
@@ -106,11 +106,13 @@ function editionMenu() {
         clear
 
         echo "Voulez Vous faire une
-    [L]vm
+    [+] Lvm Extend
+    [-] Lvm Retract
     [E]xit"
         read -p "$ " choiceEdition
         case $choiceEdition in
-            [Ll]* ) lvm-extend;;
+            [+]* ) lvm-extend;;
+            [-]* ) lvm-retract;;
             [Ee]* ) break;;
         esac
     done
