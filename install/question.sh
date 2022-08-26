@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function backendOrFrontend-question() {
+function backendOrFrontendQuestion() {
     while true; do
         clear
 
