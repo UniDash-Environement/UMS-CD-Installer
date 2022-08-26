@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-function backend-or-frontend-question() {
+function backendOrFrontend-question() {
     while true; do
         clear
 
@@ -15,14 +15,14 @@ function backend-or-frontend-question() {
 }
 
 
-function question-reseaux() {
+function questionReseaux() {
     serverIp=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     serverGateway=$(/sbin/ip route | awk '/default/ { print $3 }')
     serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
 }
 
 
-function server-num-question() {
+function serverNumQuestion() {
     while true; do
         clear
 
@@ -38,7 +38,7 @@ function server-num-question() {
 }
 
 
-function infra-name-question() {
+function infraNameQuestion() {
     infraName="UMS-CD"
     lowerInfraName="ums-cd"
 }
@@ -53,7 +53,7 @@ function questionTimeshift () {
 }
 
 
-function question-user-name () {
+function questionUserName () {
     while true; do
         clear
 
@@ -68,7 +68,7 @@ function question-user-name () {
 }
 
 
-function question-user () {
+function questionUser () {
     questionUserName
     while true; do
         clear
@@ -91,7 +91,7 @@ function question-user () {
 }
 
 
-function question-root () {
+function questionRoot () {
     while true; do
         clear
 
@@ -113,15 +113,15 @@ function question-root () {
 }
 
 
-function all-question() {
-    question-root
-    question-user
-    infra-name-question
-    question-reseaux
-    question-timeshift
+function allQuestion() {
+    questionRoot
+    questionUser
+    infraNameQuestion
+    questionReseaux
+    questionTimeshift
 
-    server-num-question
-    backend-or-frontend-question
+    serverNumQuestion
+    backendOrFrontendQuestion
 
     mkdir /etc/ums-cd
     touch /etc/ums-cd/install.conf
@@ -142,7 +142,7 @@ function all-question() {
     echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/config.conf
 }
 
-function read-conf() {
+function readConf() {
     if [ -f /etc/ums-cd/install.conf ]; then
         while read var value
         do
@@ -153,9 +153,9 @@ function read-conf() {
 
 function start() {
     if [ ! -f /etc/ums-cd/install.conf ]; then
-        all-question
+        allQuestion
     elif [ $1 == "-f" 2>/dev/null ]; then
-        all-question
+        allQuestion
     fi
 }
 
