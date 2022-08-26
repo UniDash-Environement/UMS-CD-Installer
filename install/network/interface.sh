@@ -1,10 +1,12 @@
 #!/usr/bin/bash
 
-function networkSet() {
-    chmod +x /usr/bin/fix-network
-    systemctl daemon reload
-    systemctl enable --now fix-network
-
+function readConf() {
+    if [ -e /etc/ums-cd/install.conf ]; then
+        while read var value
+        do
+            export "$var"
+        done < /etc/ums-cd/install.conf
+    fi
 }
 
 
