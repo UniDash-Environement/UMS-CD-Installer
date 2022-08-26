@@ -152,8 +152,10 @@ function read-conf() {
 }
 
 function start() {
-    if [ -e /etc/ums-cd/install.conf ] || [ $1 == "-f" ]; then
+    if [ -e /etc/ums-cd/install.conf ]; then
         all-question
+    elif [ $1 == "-f" 2>/dev/null ]
+
     fi
 }
 
