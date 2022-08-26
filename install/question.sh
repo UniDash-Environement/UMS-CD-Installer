@@ -143,7 +143,7 @@ function all-question() {
 }
 
 function read-conf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
+    if [ -f /etc/ums-cd/install.conf ]; then
         while read var value
         do
             export "$var"="$value"
@@ -152,10 +152,10 @@ function read-conf() {
 }
 
 function start() {
-    if [ -e /etc/ums-cd/install.conf ]; then
+    if [ ! -f /etc/ums-cd/install.conf ]; then
         all-question
-    elif [ $1 == "-f" 2>/dev/null ]
-
+    elif [ $1 == "-f" 2>/dev/null ]; then
+        all-question
     fi
 }
 
