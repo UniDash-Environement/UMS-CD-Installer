@@ -124,12 +124,14 @@ function lvmMenu() {
     done
 }
 
-    if [ -z $1 ]; then
-        mainMenu
-    elif [ $1 == "part1" ]; then
-        allInstallPart1
-    elif [ $1 == "part2" ]; then
-        allInstallPart2
-    elif [ $1 == "part3" ]; then
-        allInstallPart3
-    fi
+bash ./install/question.sh
+
+if [ -z $1 ]; then
+    mainMenu
+elif [ $1 == "part1" ]; then
+    allInstallPart1
+elif [ $1 == "part2" ]; then
+    allInstallPart2
+elif [ $1 == "part3" ]; then
+    allInstallPart3
+fi

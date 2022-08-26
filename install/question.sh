@@ -156,3 +156,5 @@ function start() {
         all-question
     fi
 }
+
+start
