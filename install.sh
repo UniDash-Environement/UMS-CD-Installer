@@ -7,6 +7,7 @@ function allInstallPart1() {
     bash ./install/config/system.sh addAdministrator
     bash ./install/config/system.sh changeHostname
     bash ./install/service/system/timeshift.sh installTimeshift
+    sed -i "s/cd \/root && git clone https:\/\/github.com\/UMS-CD\/UMS-CD-Installer.git//g" /root/.bashrc
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part2" >> /root/.bashrc
     reboot
@@ -18,7 +19,8 @@ function allInstallPart2() {
     # bash ./install/network/wireguard.sh installWireguard
     bash ./install/network/interface.sh networkSet
     bash ./install/service/system/proxmox.sh installProxmox
-    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part2/cd \/root\/UMS-CD-Installer && bash install.sh part3/g" /root/.bashrc
+    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
+    echo "cd /root/UMS-CD-Installer && bash install.sh part3" >> /root/.bashrc
     reboot
 }
 
