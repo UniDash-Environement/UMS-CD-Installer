@@ -1,13 +1,6 @@
 #!/usr/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"="$value"
-        done < /etc/ums-cd/install.conf
-    fi
-}
+source /etc/ums-cd/install.conf
 
 function installProxmox() {
 
@@ -50,5 +43,4 @@ function postInstallProxmox() {
     pveam download local $(pveam available --section system | grep debian-11 | cut -d" " -f11)
 }
 
-readConf
 $1

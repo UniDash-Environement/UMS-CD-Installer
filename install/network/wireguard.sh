@@ -1,13 +1,6 @@
 #!/usr/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"
-        done < /etc/ums-cd/install.conf
-    fi
-}
+source /etc/ums-cd/install.conf
 
 function installWireguardClient() {
     apt-get install -y wireguard resolvconf
@@ -43,5 +36,4 @@ function installWireguard() {
     fi
 }
 
-readConf
 $1

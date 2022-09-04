@@ -1,14 +1,6 @@
 #!/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/config.conf ]; then
-        while read var value
-        do
-            export "$var"="$value"
-        done < /etc/ums-cd/config.conf
-    fi
-}
-
+source /etc/ums-cd/config.conf
 
 function questionReseaux() {
     serverIp=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
@@ -90,7 +82,6 @@ function fixNameServer(){
 nameserver 1.0.0.1" > /etc/resolv.conf
 }
 
-readConf
 question-reseaux
 
 networkSet

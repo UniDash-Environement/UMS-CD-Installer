@@ -1,13 +1,6 @@
 #!/usr/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"
-        done < /etc/ums-cd/install.conf
-    fi
-}
+source /etc/ums-cd/config.conf
 
 function addSshKey() {
     num=0
@@ -28,4 +21,4 @@ function addSshKey() {
     done
 }
 
-readConf
+addSshKey

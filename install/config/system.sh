@@ -1,13 +1,6 @@
 #!/usr/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"
-        done < /etc/ums-cd/install.conf
-    fi
-}
+source /etc/ums-cd/install.conf
 
 function addAdministrator() {
     apt-get install -y sudo
@@ -45,5 +38,4 @@ function changeHostname() {
     echo $hostname > /etc/hostname
 }
 
-readConf
 $1

@@ -140,6 +140,11 @@ function allQuestion() {
 
     echo -e "backendOrFrontend=${backendOrFrontend}\n" > /etc/ums-cd/config.conf
     echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/config.conf
+    echo -e "lowerInfraName=${lowerInfraName}\n" >> /etc/ums-cd/config.conf
+    echo -e "infraName=${infraName}\n" >> /etc/ums-cd/config.conf
+
+    chmod +x /etc/ums-cd/install.conf
+    chmod +x /etc/ums-cd/config.conf
 }
 
 function readConf() {

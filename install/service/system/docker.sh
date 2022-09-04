@@ -1,13 +1,6 @@
 #!/usr/bin/bash
 
-function readConf() {
-    if [ -e /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"="$value"
-        done < /etc/ums-cd/install.conf
-    fi
-}
+source /etc/ums-cd/install.conf
 
 function installDocker() {
     timeshift --create
@@ -37,5 +30,4 @@ function installDocker() {
     fi
 }
 
-readConf
 $1
