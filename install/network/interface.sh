@@ -15,5 +15,5 @@ function fixNameServer(){
 nameserver 1.0.0.1" > /etc/resolv.conf
 }
 
-read-conf
+readConf
 $1

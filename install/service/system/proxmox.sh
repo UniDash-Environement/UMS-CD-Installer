@@ -50,5 +50,5 @@ function postInstallProxmox() {
     pveam download local $(pveam available --section system | grep debian-11 | cut -d" " -f11)
 }
 
-read-conf
+readConf
 $1

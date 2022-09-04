@@ -37,5 +37,5 @@ function installDocker() {
     fi
 }
 
-readDonf
+readConf
 $1
