@@ -20,7 +20,7 @@ function installProxmox() {
 
     # configuration des addresse / domaine de debian pour proxmox
     echo "127.0.0.1       localhost
-${serverIp}         mail.pikacloud.ga ${hostname}
+${serverIp}         mail.exemple.com ${hostname}
 # The following lines are desirable for IPv6 capable hosts
 ::1             localhost ip6-localhost ip6-loopback
 ff02::1         ip6-allnodes
