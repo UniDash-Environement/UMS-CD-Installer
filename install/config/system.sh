@@ -2,8 +2,11 @@
 
 function readConf() {
     if [ -e /etc/ums-cd/install.conf ]; then
+        # shellcheck disable=SC2162
+        # shellcheck disable=SC2034
         while read var value
         do
+            # shellcheck disable=SC2163
             export "$var"
         done < /etc/ums-cd/install.conf
     fi
