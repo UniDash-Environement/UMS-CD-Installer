@@ -10,9 +10,12 @@ function readConf() {
 }
 
 
-function fixNameServer(){
-    echo "nameserver 1.1.1.1
-nameserver 1.0.0.1" > /etc/resolv.conf
+function networkSet(){
+    cp ./asset/bin/fix-network.sh /bin/fix-network
+    chmod +x /bin/fix-network
+
+    cp ./asset/systemd/fix-network.service /etc/systemd/system/fix-network.service
+    systemctl enable --now fix-network.service
 }
 
 readConf
