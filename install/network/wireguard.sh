@@ -37,9 +37,9 @@ function installWireguardServer() {
 
 function installWireguard() {
     if [ $backendOrFrontend == "backend" 2>/dev/null ]; then
-        install-wireguard-client
+        installWireguardClient
     else
-        install-wireguard-server
+        installWireguardServer
     fi
 }
 
