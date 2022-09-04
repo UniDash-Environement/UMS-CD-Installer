@@ -27,6 +27,7 @@ function allInstallPart3() {
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part3//g" /root/.bashrc
     bash ./install/service/system/proxmox.sh postInstallProxmox
     bash ./install/service/system/docker.sh installDocker
+    rm -rf /etc/ums-cd/install.conf
     reboot
 }
 
