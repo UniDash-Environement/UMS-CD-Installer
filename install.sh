@@ -19,7 +19,7 @@ function allInstallPart2() {
     # bash ./install/network/wireguard.sh installWireguard
     bash ./install/network/interface.sh networkSet
     bash ./install/service/system/proxmox.sh installProxmox
-    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
+    sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part2//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part3" >> /root/.bashrc
     reboot
 }
