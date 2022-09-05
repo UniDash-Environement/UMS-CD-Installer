@@ -46,5 +46,4 @@ deb-src http://security.debian.org/debian-security      bullseye-security main c
     apt-get upgrade -y
 }
 
-readConf
 $1
