@@ -1,0 +1,13 @@
+---
+
+- name: debian docker source
+  block:
+    - name: somerepo |no apt key
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/debian/gpg
+        dest: /etc/apt/keyrings/docker.gpg
+
+    - name: somerepo | apt source
+      ansible.builtin.apt_repository:
+      repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian amd64 stable"
+      state: present

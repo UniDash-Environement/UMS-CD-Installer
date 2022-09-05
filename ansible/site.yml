@@ -1,0 +1,51 @@
+---
+# This playbook deploys the whole application stack in this site.
+
+- name: apply core configuration to all nodes
+  hosts: all
+  remote_user: root
+
+  roles:
+    - core
+
+- name: configure and deploy the net-master
+  hosts: net-master
+  remote_user: root
+
+  roles:
+    - net-master
+
+- name: configure and deploy the net-slave
+  hosts: net-slave
+  remote_user: root
+
+  roles:
+    - net-slave
+
+- name: configure and deploy docker
+  hosts: docker
+  remote_user: root
+
+  roles:
+    - docker
+
+- name: configure and deploy proxmox
+  hosts: proxmox
+  remote_user: root
+
+  roles:
+    - proxmox
+
+- name: configure and deploy the panel-master
+  hosts: panel-master
+  remote_user: root
+
+  roles:
+    - panel-master
+
+- name: configure and deploy the panel-slave
+  hosts: panel-slave
+  remote_user: root
+
+  roles:
+    - panel-slave

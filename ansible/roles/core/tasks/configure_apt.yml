@@ -1,0 +1,50 @@
+---
+
+- name: debian backport
+  ansible.builtin.apt_repository:
+    repo: deb http://deb.debian.org/debian bullseye-backports main contrib
+    state: present
+
+- name: debian backport source
+  ansible.builtin.apt_repository:
+    repo: deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
+    state: present
+
+- name: Install ca-certificates
+  ansible.builtin.apt:
+    name: ca-certificates
+    state: present
+
+- name: Install curl
+  ansible.builtin.apt:
+    name: curl
+    state: present
+
+- name: Install gnupg
+  ansible.builtin.apt:
+    name: gnupg
+    state: present
+
+- name: Install lsb-release
+  ansible.builtin.apt:
+    name: lsb-release
+    state: present
+
+- name: Install python3-mako
+  ansible.builtin.apt:
+    name: python3-mako
+    state: present
+
+- name: Install iptables
+  ansible.builtin.apt:
+    name: iptables
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Update all packages to their latest version
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
