@@ -29,6 +29,32 @@ iface ${cartereseaux} inet static
     gateway ${serverGateway}
 # Réseaux Physique
 
+auto $IFACE
+iface $IFACE inet manual
+    address 172.16.0.${serverNum}/16
+    ip-forward 1
+    pre-up ip link add wg0 type wireguard"
+
+    if [ ${backendOrFrontend} == "frontend" ]; then
+        confReseaux="${confReseaux}
+    post-up iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ${cartereseaux} -j MASQUERADE"
+        for i in "${!WireguardConfClientPbKey[@]}"
+        do
+            confReseaux="${confReseaux}
+    up wg set $IFACE listen-port 51820 private-key /etc/wireguard/privatekey peer ${WireguardConfClientPbKey[$i]} allowed-ips 172.16.0.$(expr $i + 2)/32 persistent-keepalive 25 endpoint ${wireguardEndpointIp}:51820"
+        done
+        confReseaux="${confReseaux}
+    post-down iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ${cartereseaux} -j MASQUERADE"
+    else
+        confReseaux="${confReseaux}
+    up wg set $IFACE listen-port 51820 private-key /etc/wireguard/privatekey peer ${wireguardPbKeyServer} allowed-ips 0.0.0.0/0 persistent-keepalive 25 endpoint ${wireguardEndpointIp}:51820"
+    fi
+
+    confReseaux="${confReseaux}
+    post-down ip link del wg0
+    post-up ip link set wg0 mtu 1420
+    post-up ip addr add 172.16.0.${serverNum}/16 dev wg0
+
 auto vmbr0
 iface vmbr0 inet static
     address 10.${serverNum}.0.1/16
@@ -60,3 +86,6 @@ questionReseaux
 
 networkSet
 fixNameServer
+
+ifdown wg0
+ifup wg0
