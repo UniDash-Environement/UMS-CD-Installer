@@ -126,22 +126,22 @@ function allQuestion() {
     mkdir /etc/ums-cd
     touch /etc/ums-cd/install.conf
 
-    echo -e "backendOrFrontend=${backendOrFrontend}\n" > /etc/ums-cd/install.conf
-    echo -e "serverIp=${serverIp}\n" >> /etc/ums-cd/install.conf
-    echo -e "serverGateway=${serverGateway}\n" >> /etc/ums-cd/install.conf
-    echo -e "serverMask=${serverMask}\n" >> /etc/ums-cd/install.conf
-    echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/install.conf
-    echo -e "lowerInfraName=${lowerInfraName}\n" >> /etc/ums-cd/install.conf
-    echo -e "infraName=${infraName}\n" >> /etc/ums-cd/install.conf
-    echo -e "timeshiftUUID=${timeshiftUUID}\n" >> /etc/ums-cd/install.conf
-    echo -e "userName=${userName}\n" >> /etc/ums-cd/install.conf
-    echo -e "userPass=${userPass}\n" >> /etc/ums-cd/install.conf
-    echo -e "rootPass=${rootPass}\n" >> /etc/ums-cd/install.conf
+    echo -e "backendOrFrontend=${backendOrFrontend}" > /etc/ums-cd/install.conf
+    echo -e "serverIp=${serverIp}" >> /etc/ums-cd/install.conf
+    echo -e "serverGateway=${serverGateway}" >> /etc/ums-cd/install.conf
+    echo -e "serverMask=${serverMask}" >> /etc/ums-cd/install.conf
+    echo -e "serverNum=${serverNum}" >> /etc/ums-cd/install.conf
+    echo -e "lowerInfraName=${lowerInfraName}" >> /etc/ums-cd/install.conf
+    echo -e "infraName=${infraName}" >> /etc/ums-cd/install.conf
+    echo -e "timeshiftUUID=${timeshiftUUID}" >> /etc/ums-cd/install.conf
+    echo -e "userName=${userName}" >> /etc/ums-cd/install.conf
+    echo -e "userPass=${userPass}" >> /etc/ums-cd/install.conf
+    echo -e "rootPass=${rootPass}" >> /etc/ums-cd/install.conf
 
-    echo -e "backendOrFrontend=${backendOrFrontend}\n" > /etc/ums-cd/config.conf
-    echo -e "serverNum=${serverNum}d\n" >> /etc/ums-cd/config.conf
-    echo -e "lowerInfraName=${lowerInfraName}\n" >> /etc/ums-cd/config.conf
-    echo -e "infraName=${infraName}\n" >> /etc/ums-cd/config.conf
+    echo -e "backendOrFrontend=${backendOrFrontend}" > /etc/ums-cd/config.conf
+    echo -e "serverNum=${serverNum}" >> /etc/ums-cd/config.conf
+    echo -e "lowerInfraName=${lowerInfraName}" >> /etc/ums-cd/config.conf
+    echo -e "infraName=${infraName}" >> /etc/ums-cd/config.conf
 
     chmod +x /etc/ums-cd/install.conf
     chmod +x /etc/ums-cd/config.conf
