@@ -33,7 +33,7 @@ ff02::2         ip6-allrouters" > /etc/hosts
     sed -i "s/iface ${cartereseaux} inet6 auto/# iface ${cartereseaux} inet6 auto/g" /etc/network/interfaces
 
     # installation de proxmox
-    echo apt-get install -y proxmox-ve open-iscsi postfix
+    apt-get install -y proxmox-ve open-iscsi postfix
 }
 
 
