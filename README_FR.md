@@ -20,7 +20,7 @@
 > 
 > UMS-CD intègre Proxmox et Docker comme plateforme cloud principale 
 > et une liste d'outils pour gérer votre infra entièrement sur navigateur 
-> Grâce à un bastion.
+> grâce à un bastion.
 
 ## Aventages:
 ### Upscalable:
