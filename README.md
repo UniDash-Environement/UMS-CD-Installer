@@ -8,7 +8,7 @@
 
 > ## [![Powerm1nt_Icon](https://avatars.githubusercontent.com/u/76876089?s=48&v=4)](https://github.com/Powerm1nt) [Powerm1nt](https://github.com/Powerm1nt)
 
-# EN 🇺🇸
+[README_FR 🇫🇷](README_FR.md)
 
 ## Full deployment in the blink of an eye
 
@@ -49,45 +49,3 @@
 ### Front / Back Server Network:
 > The network of the infra is designed so that the front servers are your routers and the back your machines,
 > You can't necessarily touch the network.
-
-# FR 🇫🇷
-
-## Déploiement complet en un claquement de doigt
-
-## Description:
-> UMS-CD est un system de deployment serveur sous debian 
-> évolutif en nombre de machines et compatible avec de multiples sites.
-> 
-> UMS-CD intègre Proxmox et Docker comme plateforme cloud principale 
-> et une liste d'outils pour gérer votre infra entièrement sur navigateur 
-> Grâce à un bastion.
-
-## Aventages:
-### Upscalable:
-> C’est une infrastructure évolutive car vous pouvez installer de nouveau 
-> serveur a n’importe quel moment.
-
-### Multi Site Sécurisé:
-> Vous pouvez avoir vos serveurs sur différents sites de magnier sécurisés
-> car l’infra êtes intégralement sous Wireguard.
-
-### Multi Service:
-> L'infra fonctionne de manière 100 % conteneuriser ou/et Virtualiser ce qui vous 
-> permets de multiplier les services à volonté.
-
-### Compatibilité Dédier et VPS en x86_64:
-> L’infra est compatible sur VPS et Dédier, car elle fonctionne en conteneuriser
-> par défaut et n’est qu’une sûre couche Debian.
-
-## Outils:
-### UMS Central Panel:
-> C’est un panel de centralisation des autres interface de l’infra adapter sous forme
-> d’onglet et de gride.
-
-### UMS Template Repo:
-> C’est un repos contenant plusieurs conteneurs LXC préconfigurer avec différents
-> services tels que Pterodactyl ou Nextcloud.
-
-### Front / Back Server Network:
-> Le réseau de l’infra est conçu pour que les serveurs front soient vos routeurs et les back vos machines,
-> car on ne peut pas forcément toucher au réseau.
