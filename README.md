@@ -18,9 +18,9 @@
 > UMS-CD is a server deployment system under debian 
 > It is scalable in number of machines and compatible with multiple sites.
 > 
-> UMS-CD integrates Proxmox and Docker as the main cloud platform 
-> and a list of tools to manage your infrastructure entirely in the browser 
-> thanks to a bastion.
+> UMS-CD integrates Proxmox and Docker as the main cloud platform
+> and a list of tools to manage your infrastructure
+> entirely in the browser through a bastion.
 
 ## Aventages:
 ### Upscalable:
