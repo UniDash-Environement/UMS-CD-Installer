@@ -24,8 +24,8 @@
 
 ## Aventages:
 ### Upscalable:
-> C’est une infrastructure évolutive car vous pouvez installer de nouveau 
-> serveur à n’importe quel moment.
+> C’est une infrastructure évolutive car vous pouvez installer de nouveaux 
+> serveurs à n’importe quel moment.
 
 ### Multi Site Sécurisé:
 > Vous pouvez avoir vos serveurs sur différents sites de manière sécurisé
