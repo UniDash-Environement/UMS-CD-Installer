@@ -8,8 +8,6 @@
 
 > ## <a href="https://github.com/mathias-tavernier-roux"><img src="https://avatars.githubusercontent.com/u/71872148?s=48&v=4" alt="MH13_Icon" width="48"/></a> [Mathias](https://github.com/mathias-tavernier-roux)
 
-> ## [![Powerm1nt_Icon](https://avatars.githubusercontent.com/u/76876089?s=48&v=4)](https://github.com/Powerm1nt) [Powerm1nt](https://github.com/Powerm1nt)
-
 [README_FR 🇫🇷](README_FR.md)
 
 ## Full deployment in the blink of an eye
