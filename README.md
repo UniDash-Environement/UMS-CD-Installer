@@ -13,39 +13,29 @@
 ## Full deployment in the blink of an eye
 
 ## Description:
-> UMS-CD is a server deployment system under debian 
-> It is scalable in number of machines and compatible with multiple sites.
+> UMS-CD is a server deployment system under debian scalable in number of machines and compatible with multiple sites.
 > 
-> UMS-CD integrates Proxmox and Docker as the main cloud platform
-> and a list of tools to manage your infrastructure
-> entirely in the browser through a bastion.
+> UMS-CD integrates Proxmox and Docker as the main cloud platform and a list of tools to manage your infrastructure entirely in the browser through a bastion.
 
 ## Aventages:
 ### Upscalable:
-> It's a scalable infrastructure because you can install new 
-> It's a scalable infrastructure because you can install a new server at any time.
+> It is a scalable infrastructure because you can install new servers at any time.
 
 ### Multi Site Secure:
-> You can have your servers on different sites of magnier secured
-> You can have your servers on different magnier sites secured because the infrastructure is entirely under Wireguard.
+> You can have your servers on different sites in a secure way because the infra is entirely under Wireguard.
 
 ### Multi Service:
-> The infra works in a way 100% containerize or/and Virtualize what allows you to multiply the services 
-> This allows you to multiply the services at will.
+> The infra works in a 100% containerized or/and virtualized way, which allows you to multiply the services at will.
 
 ### Compatibility Dédier and VPS in x86_64:
-> The infra is compatible on VPS and Dédier, because it works in containerize
-> The infra is compatible with VPS and Dédier, because it works as a container by default and is only a safe Debian layer.
+> The infra is compatible on VPS and dedicated, as it works with containers by default and is only a Debian overlay.
 
 ## Tools:
 ### UMS Central Panel:
-> This is a centralization panel of other interface of the infra adapt in the form of tabs and gride.
-> It is a centralized panel of other infra interface adapting in tab and flange form.
+> It is a centralization panel of the other interfaces of the infra adapted in the form of tabs and grids.
 
 ### UMS Template Repo:
-> This is a repository containing several LXC containers preconfigured with different
-> services such as Pterodactyl or Nextcloud.
+> It is a repo containing several preconfigured LXC containers with different services such as Pterodactyl or Nextcloud.
 
 ### Front / Back Server Network:
-> The network of the infra is designed so that the front servers are your routers and the back your machines,
-> You can't necessarily touch the network.
+> The infra network is designed so that the front servers are your routers and the backs your machines, because you can't necessarily touch the network.
