@@ -15,37 +15,37 @@
 ## Déploiement complet en un claquement de doigt
 
 ## Description:
-> UMS-CD est un system de deployment serveur sous debian 
+> UMS-CD est un système de deploiement serveur sous debian 
 > évolutif en nombre de machines et compatible avec de multiples sites.
 > 
 > UMS-CD intègre Proxmox et Docker comme plateforme cloud principale 
 > et une liste d'outils pour gérer votre infra entièrement sur navigateur 
-> Grâce à un bastion.
+> grâce à un bastion.
 
 ## Aventages:
 ### Upscalable:
-> C’est une infrastructure évolutive car vous pouvez installer de nouveau 
-> serveur a n’importe quel moment.
+> C’est une infrastructure évolutive car vous pouvez installer de nouveaux 
+> serveurs à n’importe quel moment.
 
 ### Multi Site Sécurisé:
-> Vous pouvez avoir vos serveurs sur différents sites de magnier sécurisés
-> car l’infra êtes intégralement sous Wireguard.
+> Vous pouvez avoir vos serveurs sur différents sites de manière sécurisé
+> car l’infra est intégralement sous Wireguard.
 
 ### Multi Service:
-> L'infra fonctionne de manière 100 % conteneuriser ou/et Virtualiser ce qui vous 
-> permets de multiplier les services à volonté.
+> L'infra fonctionne de manière 100 % conteneurisé ou/et virtualisé, ce qui vous 
+> permet de multiplier les services à volonté.
 
-### Compatibilité Dédier et VPS en x86_64:
-> L’infra est compatible sur VPS et Dédier, car elle fonctionne en conteneuriser
-> par défaut et n’est qu’une sûre couche Debian.
+### Compatibilité dédié et VPS en x86_64:
+> L’infra est compatible sur VPS et dédié, car elle fonctionne avec des conteneurs
+> par défaut et n’est qu’une surcouche Debian.
 
 ## Outils:
 ### UMS Central Panel:
-> C’est un panel de centralisation des autres interface de l’infra adapter sous forme
-> d’onglet et de gride.
+> C’est un panel de centralisation des autres interfaces de l’infra adapté sous forme
+> d’onglets et de grides.
 
 ### UMS Template Repo:
-> C’est un repos contenant plusieurs conteneurs LXC préconfigurer avec différents
+> C’est un repo contenant plusieurs conteneurs LXC préconfigurés avec différents
 > services tels que Pterodactyl ou Nextcloud.
 
 ### Front / Back Server Network:
