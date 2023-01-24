@@ -8,8 +8,8 @@ function backendOrFrontendQuestion() {
         read -p "$ " backendOrFrontend
 
         case $backendOrFrontend in
-            [Bb]* ) backendOrFrontend="backend" && break;;
-            [Ff]* ) backendOrFrontend="frontend" && break;;
+            [Bb]* ) backendOrFrontend="Back" && break;;
+            [Ff]* ) backendOrFrontend="Front" && break;;
         esac
     done
 }

@@ -36,8 +36,23 @@ function rootPassword() {
 
 
 function changeHostname() {
-    hostname="${backendOrFrontend}-${serverNum}-${lowerInfraName}"
-    echo $hostname > /etc/hostname
+    # Create Hostname Part
+    numServer=${serverNum}
+    vpsOrSRV="SRV"
+    typeServer=${backendOrFrontend}
+    infraName=${InfraName}
+
+    # Compile Hostname
+    newHostname=${vpsOrSRV}-${typeServer}-${numServer}-${infraName}
+    hostname=$(cat /etc/hostname)
+
+    # Change Hostname
+    sed -i "s/${hostname}/${newHostname}/g" /etc/hostname
+
+    # Change Hosts
+    sed -i "s/${hostname}/${newHostname}.local ${newHostname}/g" /etc/hosts
+    sed -i "s/127.0.1.1/${serverIp}/g" /etc/hosts
+    hostname --ip-address
 }
 
 $1
