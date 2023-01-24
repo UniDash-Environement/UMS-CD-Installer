@@ -1,16 +1,12 @@
 #!/usr/bin/bash
 
 function backendOrFrontendQuestion() {
-    while true; do
+    backendOrFrontend=""
+    while [backendOrFrontend == "Back" 2>/dev/null || backendOrFrontend == "Front" 2>/dev/null]; do
         clear
 
-        echo "Votre serveur est un [B]ackend ou un [F]rontend?"
+        echo "Votre serveur est un [B]ack ou un [F]ront?"
         read -p "$ " backendOrFrontend
-
-        case $backendOrFrontend in
-            [Bb]* ) backendOrFrontend="Back" && break;;
-            [Ff]* ) backendOrFrontend="Front" && break;;
-        esac
     done
 }
 
@@ -21,31 +17,21 @@ function questionReseaux() {
     serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
     serverInterface=$(ip -br a | grep $serverIp | cut -d " " -f 1)
 
-    while true; do
+    while [ $userName != "" 2>/dev/null ]; do
         clear
 
         echo "Quel est l'ip de la super node que vous souaiter?"
         read -p "$ " superNodeIp
-
-        if [ $userName != "" 2>/dev/null ]; then
-            break
-        fi
     done
 }
 
 
 function serverNumQuestion() {
-    while true; do
+    while [ $serverNum =~ ^[0-9]+$ && $serverNum != "" 2>/dev/null]; do
         clear
 
         echo "Quel est le numéro de votre serveur?"
         read -p "$ " serverNum
-
-        if [[ $serverNum =~ ^[0-9]+$ ]]; then
-            if [ $serverNum != "" 2>/dev/null ]; then
-                break
-            fi
-        fi
     done
 }
 
@@ -66,15 +52,14 @@ function questionTimeshift () {
 
 
 function questionUserName () {
-    while true; do
+    while [ $userName != "" 2>/dev/null ]; do
         clear
 
         echo "Quel est le nouveau nom d'utilisateur que vous souaiter?"
         read -p "$ " userName
 
         if [ $userName != "" 2>/dev/null ]; then
-            userName=$(echo $userName | tr ‘[A-Z]’ ‘[a-z]’)
-            break
+            userName=$(echo $userName | tr '[A-Z]' '[a-z]')
         fi
     done
 }
@@ -82,7 +67,7 @@ function questionUserName () {
 
 function questionUser () {
     questionUserName
-    while true; do
+    while [$userPass != "" 2>/dev/null && $userPass2 != "" 2>/dev/null && $userPass == $userPass2 2>/dev/null ]; do
         clear
 
         echo "Quel est sont mots de pass?"
@@ -91,20 +76,12 @@ function questionUser () {
 
         echo "Répter le."
         read -s -p "$ " userPass2
-
-        if [ $userPass != "" 2>/dev/null ]; then
-            if [ $userPass2 != "" 2>/dev/null ]; then
-                if [ $userPass == $userPass2 2>/dev/null ]; then
-                    break
-                fi
-            fi
-        fi
     done
 }
 
 
 function questionRoot () {
-    while true; do
+    while [ $rootPass != "" 2>/dev/null && $rootPass2 != "" 2>/dev/null && $rootPass == $rootPass2 2>/dev/null ]; do
         clear
 
         echo "Quel est le nouveau mots de pass root que vous souaiter?"
@@ -113,31 +90,27 @@ function questionRoot () {
 
         echo "Répter le."
         read -s -p "$ " rootPass2
-
-        if [ $rootPass != "" 2>/dev/null ]; then
-            if [ $rootPass2 != "" 2>/dev/null ]; then
-                if [ $rootPass == $rootPass2 2>/dev/null ]; then
-                    break
-                fi
-            fi
-        fi
     done
 }
 
 
 function allQuestion() {
+    # Execute auto Question
     questionRoot
     questionUser
     infraNameQuestion
     questionReseaux
     questionTimeshift
 
+    # Execute manual Question
     serverNumQuestion
     backendOrFrontendQuestion
 
+    # Create Conf file
     mkdir /etc/ums-cd
     touch /etc/ums-cd/install.conf
 
+    # Write Conf file
     echo -e "backendOrFrontend=${backendOrFrontend}" > /etc/ums-cd/install.conf
     echo -e "serverIp=${serverIp}" >> /etc/ums-cd/install.conf
     echo -e "superNodeIp=${superNodeIp}" >> /etc/ums-cd/install.conf
@@ -157,23 +130,14 @@ function allQuestion() {
     echo -e "lowerInfraName=${lowerInfraName}" >> /etc/ums-cd/config.conf
     echo -e "infraName=${infraName}" >> /etc/ums-cd/config.conf
 
+    # Set permission to conf file
     chmod +x /etc/ums-cd/install.conf
     chmod +x /etc/ums-cd/config.conf
 }
 
-function readConf() {
-    if [ -f /etc/ums-cd/install.conf ]; then
-        while read var value
-        do
-            export "$var"="$value"
-        done < /etc/ums-cd/install.conf
-    fi
-}
-
 function start() {
-    if [ ! -f /etc/ums-cd/install.conf ]; then
-        allQuestion
-    elif [ $1 == "-f" 2>/dev/null ]; then
+    # Check if conf file exist or if -f is set
+    if [ ! -f /etc/ums-cd/install.conf || $1 == "-f" 2>/dev/null ]; then
         allQuestion
     fi
 }
