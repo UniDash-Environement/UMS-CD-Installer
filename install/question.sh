@@ -19,6 +19,18 @@ function questionReseaux() {
     serverIp=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
     serverGateway=$(/sbin/ip route | awk '/default/ { print $3 }')
     serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
+    serverInterface=$(ip -br a | grep $serverIp | cut -d " " -f 1)
+
+    while true; do
+        clear
+
+        echo "Quel est l'ip de la super node que vous souaiter?"
+        read -p "$ " superNodeIp
+
+        if [ $userName != "" 2>/dev/null ]; then
+            break
+        fi
+    done
 }
 
 
@@ -128,6 +140,8 @@ function allQuestion() {
 
     echo -e "backendOrFrontend=${backendOrFrontend}" > /etc/ums-cd/install.conf
     echo -e "serverIp=${serverIp}" >> /etc/ums-cd/install.conf
+    echo -e "superNodeIp=${superNodeIp}" >> /etc/ums-cd/install.conf
+    echo -e "serverInterface=${serverInterface}" >> /etc/ums-cd/install.conf
     echo -e "serverGateway=${serverGateway}" >> /etc/ums-cd/install.conf
     echo -e "serverMask=${serverMask}" >> /etc/ums-cd/install.conf
     echo -e "serverNum=${serverNum}" >> /etc/ums-cd/install.conf
