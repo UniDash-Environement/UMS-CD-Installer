@@ -6,7 +6,7 @@ function allInstallPart1() {
     bash ./install/config/system.sh addAdministrator
     bash ./install/config/system.sh changeHostname
     bash ./install/service/system/timeshift.sh installTimeshift
-    sed -i "s/cd \/root && git clone https:\/\/github.com\/UMS-CD\/UMS-CD-Installer.git//g" /root/.bashrc
+    sed -i "s/cd \/root && git clone --branch v2 https:\/\/github.com\/UMS-CD\/UMS-CD-Installer.git//g" /root/.bashrc
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part2" >> /root/.bashrc
     reboot
