@@ -9,7 +9,7 @@ function allInstallPart1() {
     read
     bash ./install/config/system.sh changeHostname
     read
-    bash ./install/service/system/timeshift.sh installTimeshift
+    bash ./install/service/timeshift.sh installTimeshift
     read
     sed -i "s/cd \/root && git clone --branch v2 https:\/\/github.com\/UMS-CD\/UMS-CD-Installer.git//g" /root/.bashrc
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
@@ -23,7 +23,7 @@ function allInstallPart2() {
     read
     bash ./install/network/interface.sh networkSet
     read
-    bash ./install/service/system/proxmox.sh installProxmox
+    bash ./install/service/proxmox.sh installProxmox
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part2//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part3" >> /root/.bashrc
     reboot
@@ -32,7 +32,7 @@ function allInstallPart2() {
 
 function allInstallPart3() {
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part3//g" /root/.bashrc
-    bash ./install/service/system/proxmox.sh postInstallProxmox
+    bash ./install/service/proxmox.sh postInstallProxmox
     read
     rm -rf /etc/ums-cd/install.conf
     reboot
@@ -82,10 +82,10 @@ function mainMenu() {
                     rootPassword ) bash ./install/config/system.sh rootPassword;;
                     user ) bash ./install/config/system.sh addAdministrator;;
                     wireguardClient ) bash ./install/network/wireguard.sh installWireguardClient;;
-                    nameServer ) bash ./install/service/system/timeshift.sh installTimeshift;;
-                    proxmoxP1 ) bash ./install/service/system/proxmox.sh installProxmox;;
-                    proxmoxP2 ) bash ./install/service/system/proxmox.sh postInstallProxmox;;
-                    docker ) bash ./install/service/system/docker.sh installDocker;;
+                    nameServer ) bash ./install/service/timeshift.sh installTimeshift;;
+                    proxmoxP1 ) bash ./install/service/proxmox.sh installProxmox;;
+                    proxmoxP2 ) bash ./install/service/proxmox.sh postInstallProxmox;;
+                    docker ) bash ./install/service/docker.sh installDocker;;
                     sshConfigure ) bash ./install/config/ssh.sh sshConfig;;
                     nameServer ) bash ./install/network/interface.sh fixNameServer;;
                 esac

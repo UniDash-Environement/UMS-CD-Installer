@@ -47,7 +47,6 @@ function changeHostname() {
     # Change Hosts
     sed -i "s/${hostname}/${newHostname}.local ${newHostname}/g" /etc/hosts
     sed -i "s/127.0.1.1/${serverIp}/g" /etc/hosts
-    hostname --ip-address
 }
 
 $1
