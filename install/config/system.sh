@@ -31,14 +31,8 @@ function rootPassword() {
 
 
 function changeHostname() {
-    # Create Hostname Part
-    numServer=${serverNum}
-    vpsOrSRV="SRV"
-    typeServer=${backendOrFrontend}
-    infraName=${InfraName}
-
-    # Compile Hostname
-    newHostname=${vpsOrSRV}-${typeServer}-${numServer}-${infraName}
+    # Create Hostname
+    newHostname="SRV-${backendOrFrontend}-${serverNum}-${infraName}"
     hostname=$(cat /etc/hostname)
 
     # Change Hostname
