@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 function allInstallPart1() {
-    bash ./install/service/system/command.sh installCommand
     bash ./install/config/apt.sh aptSourceList
     bash ./install/config/system.sh rootPassword
     bash ./install/config/system.sh addAdministrator
