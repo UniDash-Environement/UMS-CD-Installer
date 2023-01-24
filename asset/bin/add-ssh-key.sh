@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# Utilité ?
+
 source /etc/ums-cd/config.conf
 
 function addSshKey() {

@@ -1,4 +1,0 @@
----
-
-- include: install_proxmox.yml
-- include: post_install_proxmox.yml

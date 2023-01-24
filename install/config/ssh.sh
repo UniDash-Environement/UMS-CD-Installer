@@ -16,7 +16,8 @@ function sshConfig() {
     [N]on"
         read -p "$ " choiceEdition
         case $choiceEdition in
-            [Oo]* ) sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && break;;
+            [Oo]* ) sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && \
+              sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config && break;;
             [Nn]* ) break;;
         esac
     done

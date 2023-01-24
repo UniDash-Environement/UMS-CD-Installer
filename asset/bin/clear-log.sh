@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# A suprimer pour le remplacer lar log rotate
+
 rm -rf /var/log/*.[1-999].*
 num=1
 while [ true ]

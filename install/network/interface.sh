@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+# suprimer le fichier fix-network et sont service pour le corriger ici
 
 function networkSet(){
     cp ./asset/bin/fix-network.sh /bin/fix-network

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# A suprimer pour le configurer dans interface
+
 source /etc/ums-cd/config.conf
 
 function questionReseaux() {

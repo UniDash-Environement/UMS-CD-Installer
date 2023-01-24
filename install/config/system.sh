@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# Metre a jours ce fichier avec mais nouvelle doc
+
 source /etc/ums-cd/install.conf
 
 function addAdministrator() {

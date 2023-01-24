@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# A remplacer par n2n
+# suprimer le fichier fix-network et sont service pour le corriger ici
+
 source /etc/ums-cd/install.conf
 
 function installWireguardClient() {

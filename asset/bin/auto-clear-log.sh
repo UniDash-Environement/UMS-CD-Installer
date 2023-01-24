@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# A suprimer pour le remplacer lar log rotate
+
 while [ true ]
 do
     #logLife=$(df -h | grep vg0-var--log | sed "s/  / /g" | sed "s/  / /g" | sed "s/  / /g" | sed "s/  / /g" | sed "s/  / /g" | cut -d" " -f5 | sed "s/>

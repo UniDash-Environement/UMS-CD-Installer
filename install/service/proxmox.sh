@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# a refaire avec la doc de porxmox pour debian 11
+
 source /etc/ums-cd/install.conf
 
 function installProxmox() {
