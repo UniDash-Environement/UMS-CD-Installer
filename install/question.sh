@@ -2,7 +2,7 @@
 
 function backendOrFrontendQuestion() {
     backendOrFrontend=""
-    while [backendOrFrontend == "Back" 2>/dev/null || backendOrFrontend == "Front" 2>/dev/null]; do
+    while [backendOrFrontend == "Back" 2>/dev/null ] || [ backendOrFrontend == "Front" 2>/dev/null]; do
         clear
 
         echo "Votre serveur est un [B]ack ou un [F]ront?"
@@ -27,7 +27,7 @@ function questionReseaux() {
 
 
 function serverNumQuestion() {
-    while [ $serverNum =~ ^[0-9]+$ && $serverNum != "" 2>/dev/null]; do
+    while [ $serverNum =~ ^[0-9]+$ ] && [ $serverNum != "" 2>/dev/null]; do
         clear
 
         echo "Quel est le numéro de votre serveur?"
@@ -67,7 +67,7 @@ function questionUserName () {
 
 function questionUser () {
     questionUserName
-    while [$userPass != "" 2>/dev/null && $userPass2 != "" 2>/dev/null && $userPass == $userPass2 2>/dev/null ]; do
+    while [$userPass != "" 2>/dev/null && $userPass2 != "" 2>/dev/null ] && [ $userPass == $userPass2 2>/dev/null ]; do
         clear
 
         echo "Quel est sont mots de pass?"
@@ -81,7 +81,7 @@ function questionUser () {
 
 
 function questionRoot () {
-    while [ $rootPass != "" 2>/dev/null && $rootPass2 != "" 2>/dev/null && $rootPass == $rootPass2 2>/dev/null ]; do
+    while [ $rootPass != "" 2>/dev/null && $rootPass2 != "" 2>/dev/null ] && [ $rootPass == $rootPass2 2>/dev/null ]; do
         clear
 
         echo "Quel est le nouveau mots de pass root que vous souaiter?"
@@ -137,7 +137,7 @@ function allQuestion() {
 
 function start() {
     # Check if conf file exist or if -f is set
-    if [ ! -f /etc/ums-cd/install.conf || $1 == "-f" 2>/dev/null ]; then
+    if [ ! -f /etc/ums-cd/install.conf ] || [ $1 == "-f" 2>/dev/null ]; then
         allQuestion
     fi
 }
