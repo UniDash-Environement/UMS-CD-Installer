@@ -1,32 +1,27 @@
 #!/usr/bin/bash
 
-# Metre a jours ce fichier avec mais nouvelle doc
-
 source /etc/ums-cd/install.conf
 
 function addAdministrator() {
-    apt-get install -y sudo
+    # Remove Old User
+    userdel ${userName}; rm -rf /home/${userName}
 
-    UTILISATEUR=$userName
-    PASSWORD=$userPass
+    # Create New User
+    useradd                        \
+     --home-dir /home/${userName}  \
+     --base-dir /home/${userName}  \
+     --uid 1100                    \
+     --groups user                 \
+     --no-user-group               \
+     --shell /usr/bin/fish         \
+     --comment "Admin"             \
+     --create-home ${userName}
 
-    DESCRIPTION=Administrateur
-    USER_ID=1100
-    GROUP=users
+    # Set Password
+    echo ${userName}:${userPass} | chpasswd;
 
-    /usr/sbin/useradd             \
-    --home-dir /home/$UTILISATEUR \
-    --base-dir /home/$UTILISATEUR \
-    --uid $USER_ID                \
-    --groups $GROUP               \
-    --no-user-group               \
-    --shell /bin/bash             \
-    --comment "$DESCRIPTION"      \
-    --create-home $UTILISATEUR 2>/dev/null
-
-    echo $UTILISATEUR:$PASSWORD | chpasswd;
-
-    echo "$UTILISATEUR ALL=(ALL) PASSWD: ALL" > /etc/sudoers.d/$UTILISATEUR
+    # Add User to Sudoers
+    echo "${userName} ALL=(ALL) PASSWD: ALL" > /etc/sudoers.d/${userName}
 }
 
 
