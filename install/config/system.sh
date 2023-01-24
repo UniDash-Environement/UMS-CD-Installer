@@ -11,7 +11,7 @@ function addAdministrator() {
      --home-dir /home/${userName}  \
      --base-dir /home/${userName}  \
      --uid 1100                    \
-     --groups user                 \
+     --groups users                \
      --no-user-group               \
      --shell /usr/bin/fish         \
      --comment "Admin"             \
