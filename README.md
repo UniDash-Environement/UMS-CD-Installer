@@ -6,8 +6,6 @@
 
 > ## [![Pikatsuto_Icon](https://avatars.githubusercontent.com/u/52610162?s=48&v=4)](https://github.com/Pikatsuto) [Gabriel Guillou](https://github.com/Pikatsuto)
 
-> ## <a href="https://github.com/mathias-tavernier-roux"><img src="https://avatars.githubusercontent.com/u/71872148?s=48&v=4" alt="MH13_Icon" width="48"/></a> [Mathias](https://github.com/mathias-tavernier-roux)
-
 [README_FR 🇫🇷](README_FR.md)
 
 ## Full deployment in the blink of an eye
@@ -26,9 +24,6 @@
 
 ### Multi Service:
 > The infra works in a 100% containerized or/and virtualized way, which allows you to multiply the services at will.
-
-### Compatibility Dédier and VPS in x86_64:
-> The infra is compatible on VPS and dedicated, as it works with containers by default and is only a Debian overlay.
 
 ## Tools:
 ### UMS Central Panel:

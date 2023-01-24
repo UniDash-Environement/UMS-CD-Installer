@@ -6,8 +6,6 @@
 
 > ## [![Pikatsuto_Icon](https://avatars.githubusercontent.com/u/52610162?s=48&v=4)](https://github.com/Pikatsuto) [Gabriel Guillou](https://github.com/Pikatsuto)
 
-> ## <a href="https://github.com/mathias-tavernier-roux"><img src="https://avatars.githubusercontent.com/u/71872148?s=48&v=4" alt="MH13_Icon" width="48"/></a> [Mathias](https://github.com/mathias-tavernier-roux)
-
 [README_EN 🇺🇸](README.md)
 
 ## Déploiement complet en un claquement de doigt
@@ -32,10 +30,6 @@
 ### Multi Service:
 > L'infra fonctionne de manière 100 % conteneurisé ou/et virtualisé, ce qui vous 
 > permet de multiplier les services à volonté.
-
-### Compatibilité dédié et VPS en x86_64:
-> L’infra est compatible sur VPS et dédié, car elle fonctionne avec des conteneurs
-> par défaut et n’est qu’une surcouche Debian.
 
 ## Outils:
 ### UMS Central Panel:
