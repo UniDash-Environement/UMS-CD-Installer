@@ -41,8 +41,6 @@ function allInstallPart3() {
 function mainMenu() {
     while true; do
         clear
-        allAuestion
-        clear
 
         if [ ${USER} == "root" ]; then
             choiceInstallMethod=$(whiptail --title "UMS-CD Installer" --menu "Choose an install method" 15 60 3 \

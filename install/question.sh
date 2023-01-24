@@ -2,10 +2,10 @@
 
 function backendOrFrontendQuestion() {
   backendOrFrontend=""
-  while (( backendOrFrontend == "Back" 2>/dev/null || backendOrFrontend == "Front" 2>/dev/null )); do
+  while [[ $backendOrFrontend != "Back" && $backendOrFrontend != "Front" ]]; do
     clear
 
-    echo "Votre serveur est un [B]ack ou un [F]ront?"
+    echo "Votre serveur est un [Back] ou un [Front] ?"
     read -p "$ " backendOrFrontend
   done
 }
@@ -17,8 +17,8 @@ function questionReseaux() {
   serverMask=$(ip -f inet -o addr|cut -d\  -f 7 | grep $serverIp | cut -d/ -f 2)
   serverInterface=$(ip -br a | grep $serverIp | cut -d " " -f 1)
 
-  $userName=""
-  while (( $userName != "" 2>/dev/null )); do
+  superNodeIp=""
+  while [[ $superNodeIp == "" ]]; do
     clear
 
     echo "Quel est l'ip de la super node que vous souaiter?"
@@ -28,9 +28,9 @@ function questionReseaux() {
 
 
 function serverNumQuestion() {
-  $serverNum=""
+  serverNum=""
 
-  while (( $serverNum =~ ^[0-9]+$ 2>/dev/null && $serverNum != "" 2>/dev/null )); do
+  while [[ ! $serverNum =~ ^[0-9]+$ || $serverNum == "" ]]; do
     clear
 
     echo "Quel est le numéro de votre serveur?"
@@ -48,22 +48,22 @@ function infraNameQuestion() {
 function questionTimeshift () {
   timeshiftUUID=$(blkid | grep vg0-mnt--timeshift | cut -d "\"" -f 2 )
 
-  if (( $timeshiftUUID == "" 2>/dev/null )); then
+  if [[ $timeshiftUUID == "" ]]; then
     timeshiftUUID=$(blkid | grep sda1 | cut -d "\"" -f 2)
   fi
 }
 
 
 function questionUserName () {
-  $userName=""
+  userName=""
 
-  while (( $userName != "" 2>/dev/null )); do
+  while [[ $userName == "" ]]; do
     clear
 
     echo "Quel est le nouveau nom d'utilisateur que vous souaiter?"
     read -p "$ " userName
 
-    if [ $userName != "" 2>/dev/null ]; then
+    if [ $userName != "" ]; then
         userName=$(echo $userName | tr '[A-Z]' '[a-z]')
     fi
   done
@@ -73,8 +73,8 @@ function questionUserName () {
 function questionUser () {
   questionUserName
 
-  $userPass=""
-  while (( $userPass != "" 2>/dev/null && $userPass2 != "" 2>/dev/null && $userPass == $userPass2 2>/dev/null )); do
+  userPass=""
+  while [[ $userPass == "" || $userPass2 == "" || $userPass != $userPass2 ]]; do
     clear
 
     echo "Quel est sont mots de pass?"
@@ -88,9 +88,9 @@ function questionUser () {
 
 
 function questionRoot () {
-  $rootPass=""
+  rootPass=""
 
-  while (( $rootPass != "" 2>/dev/null && $rootPass2 != "" 2>/dev/null && $rootPass == $rootPass2 2>/dev/null )); do
+  while [[ $rootPass == "" || $rootPass2 == "" || $rootPass != $rootPass2 ]]; do
     clear
 
     echo "Quel est le nouveau mots de pass root que vous souaiter?"
@@ -116,6 +116,7 @@ function allQuestion() {
   backendOrFrontendQuestion
 
   # Create Conf file
+  rm -rf /etc/ums-cd
   mkdir /etc/ums-cd
   touch /etc/ums-cd/install.conf
 
@@ -146,9 +147,11 @@ function allQuestion() {
 
 function start() {
   # Check if conf file exist or if -f is set
-  if (( ! -f /etc/ums-cd/install.conf || $1 == "-f" 2>/dev/null )); then
+  echo $1
+  if [[ ! -f /etc/ums-cd/install.conf || $1 == "-f" ]]; then
+    echo "test"
     allQuestion
   fi
 }
 
-start
+start $1
