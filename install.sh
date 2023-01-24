@@ -2,10 +2,15 @@
 
 function allInstallPart1() {
     bash ./install/config/apt.sh aptSourceList
+    read
     bash ./install/config/system.sh rootPassword
+    read
     bash ./install/config/system.sh addAdministrator
+    read
     bash ./install/config/system.sh changeHostname
+    read
     bash ./install/service/system/timeshift.sh installTimeshift
+    read
     sed -i "s/cd \/root && git clone --branch v2 https:\/\/github.com\/UMS-CD\/UMS-CD-Installer.git//g" /root/.bashrc
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part1//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part2" >> /root/.bashrc
@@ -15,7 +20,9 @@ function allInstallPart1() {
 
 function allInstallPart2() {
     bash ./install/config/ssh.sh sshConfig
+    read
     bash ./install/network/interface.sh networkSet
+    read
     bash ./install/service/system/proxmox.sh installProxmox
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part2//g" /root/.bashrc
     echo "cd /root/UMS-CD-Installer && bash install.sh part3" >> /root/.bashrc
@@ -26,6 +33,7 @@ function allInstallPart2() {
 function allInstallPart3() {
     sed -i "s/cd \/root\/UMS-CD-Installer && bash install.sh part3//g" /root/.bashrc
     bash ./install/service/system/proxmox.sh postInstallProxmox
+    read
     rm -rf /etc/ums-cd/install.conf
     reboot
 }
