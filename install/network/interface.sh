@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+source /etc/ums-cd/install.conf
+
 function networkSet(){
   # Change DNS Config
   echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" > /etc/resolv.conf

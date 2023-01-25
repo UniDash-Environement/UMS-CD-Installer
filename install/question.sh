@@ -46,7 +46,7 @@ function infraNameQuestion() {
 
 
 function questionTimeshift () {
-  timeshiftUUID=$(blkid | grep vg0-timeshift | cut -d "\"" -f 2 )
+  timeshiftUUID=$(blkid | grep vg0-timeshift | cut -d "\"" -f 2)
 
   if [[ $timeshiftUUID == "" ]]; then
     timeshiftUUID=$(blkid | grep sda1 | cut -d "\"" -f 2)
