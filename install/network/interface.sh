@@ -75,9 +75,6 @@ iface vmbr1 inet static
         post-down       iptables -t nat -D POSTROUTING -s \"172.29.0.0/16\" -o vmbr255 -j MASQUERADE
 # VMBR0 Interface (Nat Network)" > /etc/network/interfaces
 
-  # Change DNS Config
-  echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" > /etc/resolv.conf
-
   # Apply Configuration
   systemctl restart networking.service
 }
