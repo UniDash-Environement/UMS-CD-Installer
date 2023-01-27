@@ -3,9 +3,6 @@
 source /etc/ums-cd/install.conf
 
 function networkSet(){
-  # Change DNS Config
-  echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" > /etc/resolv.conf
-
   # Install N2N
   wget https://packages.ntop.org/apt-stable/bullseye/all/apt-ntop-stable.deb && apt install -y ./apt-ntop-stable.deb
 
@@ -48,7 +45,7 @@ iface vmbr255 inet static
 
 auto n2n0
 iface n2n0 inet manual
-        address         10.255.0.${numServer}/8
+        address         10.255.0.${serverNum}/8
         up              systemctl restart edge.service
 # N2N Interface (VPN Network)
 
@@ -77,6 +74,9 @@ iface vmbr1 inet static
         post-up         iptables -t nat -A POSTROUTING -s \"172.29.0.0/16\" -o vmbr255 -j MASQUERADE
         post-down       iptables -t nat -D POSTROUTING -s \"172.29.0.0/16\" -o vmbr255 -j MASQUERADE
 # VMBR0 Interface (Nat Network)" > /etc/network/interfaces
+
+  # Change DNS Config
+  echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" > /etc/resolv.conf
 
   # Apply Configuration
   systemctl restart networking.service
