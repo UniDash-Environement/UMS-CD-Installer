@@ -2,6 +2,8 @@
 
 # UMS CD Installer
 
+***___Archived because is first prototype___***
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/UMS-CD/UMS-CD-Installer/blob/main/LICENSE)
 
 > ## [![Pikatsuto_Icon](https://avatars.githubusercontent.com/u/52610162?s=48&v=4)](https://github.com/Pikatsuto) [Gabriel Guillou](https://github.com/Pikatsuto)
